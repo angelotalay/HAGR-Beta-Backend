@@ -1,0 +1,283 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block extrastyle %}
+  {{ block.super }}
+{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+    <div id="content-main" class="row-fluid admin-index-page">
+        <div class="row-fluid span12">
+            <div class="span4">
+                {% if perms.atlas %}
+                <div class="module daa">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:atlas_change_changelist' %}">The Digital Ageing Atlas</a></caption>
+                        <tr>
+                            <th scope="row">Change</th>
+                            <td><a href="{% url 'admin:atlas_change_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:atlas_change_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Relationships</th>
+                            <td><a href="{% url 'admin:atlas_relationship_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Genes</th>
+                            <td><a href="{% url 'admin:atlas_gene_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:atlas_gene_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Tissues</th>
+                            <td><a href="{% url 'admin:atlas_tissue_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:atlas_tissue_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><a href="{% url 'admin:atlas_check' %}"><i class="icon-check"></i> Check changes for issues</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:atlas_check_references' %}"><i class="icon-check"></i> Check changes for referencing issues</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:atlas_check_genage' %}"><i class="icon-check"></i> Check and indicate genes in both GenAge and the DAA</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:atlas_import_changes' %}"><i class="icon-upload"></i> Import changes from CSV</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="span5">
+                {% if perms.genage_model %}
+                <div class="module genage">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:genage_human_name_changelist' %}">GenAge</a></caption>
+                        <tr>
+                            <th scope="row">Human Ageing Genes</th>
+                            <td><a href="{% url 'admin:genage_human_name_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:genage_human_name_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Model Organism Ageing Genes</th>
+                            <td><a href="{% url 'admin:genage_model_model_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:genage_model_model_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><a href="{% url 'admin:genage_model_checks' %}"><i class="icon-check"></i> Check model organisms for issues</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_csvimport' %}"><i class="icon-upload"></i> Import model organisms</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_csvupdate' %}"><i class="icon-upload"></i> Update longevity entries in model organisms</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_human_export' %}"><i class="icon-download"></i> Export GenAge human entries</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_models_export' %}"><i class="icon-download"></i> Export GenAge models entries</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div id="content-related" class="span2">
+                <div class="module" id="recent-actions-module">
+                  <h4 class="italic-title">{% trans 'My Actions' %}</h4>
+
+                  {% load log %}
+                  {% get_admin_log 10 as admin_log for_user user %}
+                  {% if not admin_log %}
+                    <p>{% trans 'None available' %}</p>
+                  {% else %}
+                    <ul class="actionlist">
+                      {% for entry in admin_log %}
+                        <li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}text-error{% endif %}">
+
+                          <i class="{% if entry.is_addition %}icon-plus{% endif %}{% if entry.is_change %}icon-pencil{% endif %}{% if entry.is_deletion %}icon-trash{% endif %} icon-alpha5"></i>
+
+                          {% spaceless %}
+                            {% if entry.is_addition %}{% trans 'added'|capfirst %}{% endif %}
+                            {% if entry.is_change %}{% trans 'changed'|capfirst %}{% endif %}
+                            {% if entry.is_deletion %}{% trans 'deleted'|capfirst %}{% endif %}
+
+                            {% if entry.content_type %}
+                              <span class="mini quiet">{% filter capfirst %}
+                                {% trans entry.content_type.name %}{% endfilter %}</span>
+                            {% else %}
+                              <span class="mini quiet">{% trans 'Unknown content' %}</span>
+                            {% endif %}
+                          {% endspaceless %}&nbsp;
+
+                          {% if entry.is_deletion or not entry.get_admin_url %}
+                            <span class="color-grey">{{ entry.object_repr }}</span>
+                          {% else %}
+                            <a href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                          {% endif %}
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid span12">
+            <div class="span4">
+                {% if perms.anage %}
+                <div class="module anage">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:anage_anagename_changelist' %}">AnAge</a></caption>
+                        <tr>
+                            <th scope="row">Species Longevity Entries</th>
+                            <td><a href="{% url 'admin:anage_anagename_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:anage_anagename_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Bibliographic References</th>
+                            <td><a href="{% url 'admin:anage_anagebiblio_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:anage_anagebiblio_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="span5">
+                {% if perms.gendr %}
+                <div class="module gendr">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:gendr_gene_changelist' %}">GenDR</a></caption>
+                        <tr>
+                            <th scope="row">Gene Manipulations</th>
+                            <td><a href="{% url 'admin:gendr_gene_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:gendr_gene_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gene Expression</th>
+                            <td><a href="{% url 'admin:gendr_expression_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:gendr_expression_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td><a href="{% url 'admin:gene_manip_check' %}"><i class="icon-check"></i> Check gene manipulations for issues</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:gendr_manip_export' %}"><i class="icon-upload"></i> Export GenDR manipulations entries</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:gendr_exp_export' %}"><i class="icon-upload"></i> Export GenDR expression entries</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_human_export' %}"><i class="icon-download"></i> Export GenAge human entries</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="{% url 'admin:genage_models_export' %}"><i class="icon-download"></i> Export GenAge models entries</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row-fluid span12">
+            <div class="span4">
+                {% if perms.longevity %}
+                <div class="module longevity">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:longevity_variant_changelist' %}">LongevityMap</a></caption>
+                        <tr>
+                            <th scope="row">Variant</th>
+                            <td><a href="{% url 'admin:longevity_variant_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:longevity_variant_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Variant Groups</th>
+                            <td><a href="{% url 'admin:longevity_variantgroup_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:longevity_variantgroup_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Genes</th>
+                            <td><a href="{% url 'admin:longevity_gene_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:longevity_gene_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Populations</th>
+                            <td><a href="{% url 'admin:longevity_population_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:longevity_population_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="span5">
+                {% if perms.django_libage %}
+                <div class="module libage">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:django_libage_bibliographicentry_changelist' %}">LibAge</a></caption>
+                        <tr>
+                            <th scope="row">Bibliographic Entries</th>
+                            <td><a href="{% url 'admin:django_libage_bibliographicentry_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:django_libage_bibliographicentry_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Citations</th>
+                            <td><a href="{% url 'admin:django_libage_citation_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:django_libage_citation_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Sources</th>
+                            <td><a href="{% url 'admin:django_libage_source_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:django_libage_source_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row-fluid span12">
+            <div class="span4">
+                {% if perms.drugage %}
+                <div class="module drugage">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:drugage_drugageresults_changelist' %}">DrugAge</a></caption>
+                        <tr>
+                            <th scope="row">Results</th>
+                            <td><a href="{% url 'admin:drugage_drugageresults_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:drugage_drugageresults_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+            <div class="span4">
+                {% if perms.cellage %}
+                <div class="module cellage">
+                    <table class="table-overview applist">
+                        <caption class="section"><a href="{% url 'admin:cellage_cellagegeneinterventions_changelist' %}">CellAge</a></caption>
+                        <tr>
+                            <th scope="row">Results</th>
+                            <td><a href="{% url 'admin:cellage_cellagegeneinterventions_changelist' %}" class="changelink icon">{% trans 'Change' %}</a></td>
+                            <td><a href="{% url 'admin:cellage_cellagegeneinterventions_add' %}" class="addlink icon"><i class="icon-plus-sign icon-alpha75"></i>{% trans 'Add' %}</a></td>
+                        </tr>
+                    </table>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block sidebar %}
+{% endblock %}

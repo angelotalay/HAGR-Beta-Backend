@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load django_tables2 %} 
+{% load markdown_deux_tags %}
+
+{% block content %}
+	
+    <div class="yui3-u-1 details-header gene-bg">
+        <h1>{{ gene.name }}</h1>
+    </div>
+
+	<div class="yui3-u-1-3 details-column small-column">
+		<div>
+			<h2>Symbol</h2>
+			<div>
+				{{ gene.symbol }}
+				{% if gene.alias != '' %}
+					(<i>may also be known as:</i> {{ gene.alias }})
+				{% endif %}
+			</div>
+			<h2>Organism</h2>
+			<div> {{ gene.organism }}</div>
+			{% if gene.description != '' %}
+			<h2>Description</h2>
+			<div>{{ gene.description|markdown }}</div>
+			{% endif %}
+			{% if orthologs %}
+			<h2>Orthologs</h2>
+			<table class="ortholog-table">
+				<thead>
+                    <tr><th>Symbol</th><th>Species</th><th></th></tr>
+				</thead>
+				<tbody>
+                    {% for o in orthologs %}
+                    <tr>
+                        <td>{% if o.entrez_id %}<a href="http://www.ncbi.nlm.nih.gov/gene/{{ o.entrez_id }}">{{ o.symbol }}</a>{% else %}{{ o.symbol }}{% endif %}</td>
+                        <td>{{ o.organism }}</td>
+                    </tr>
+                    {% endfor %}
+				</tbody>
+			</table>
+			{% endif %}
+			<h2>Links to external resources</h2>
+			<ul class="external-list">
+				{% if gene.in_genage %}
+				<li class="genage-link">
+					{% if gene.organism.taxonomy_id == 9606 %}
+					<a class="genage-human" href="http://genomics.senescence.info/genes/entry.php?entrez_id={{ gene.entrez_id }}">
+					{% else %}
+					<a class="genage-model" href="http://genomics.senescence.info/genes/details.php?entrez_id={{ gene.entrez_id }}&amp;organism={{ gene.organism.name }}">
+					{% endif %}
+					</a>
+				</li>
+				{% endif %}
+				<li><a href="http://www.ncbi.nlm.nih.gov/gene/{{ gene.entrez_id }}">Entrez Gene: {{ gene.entrez_id }}</a></li>
+				{% if gene.omim != '' %}<li><a href="http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id={{ gene.omim }}">OMIM: {{ gene.omim }}</a></li>{% endif %}
+				{% if gene.ensembl != '' %}<li><a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={{ gene.ensembl }}">Ensembl: {{ gene.ensembl }}</a></li>{% endif %}
+				{% if gene.uniprot != '' %}<li><a href="http://www.uniprot.org/uniprot/{{ gene.uniprot }}">UniProt: {{ gene.uniprot }}</a></li>{% endif %}
+				{% if gene.unigene != '' %}<li><a href="http://www.ncbi.nlm.nih.gov/UniGene/clust.cgi?ORG={{ unigene }}&CID={{ gene.unigene }}">UniGene: {{ gene.unigene }}</a></li>{% endif %}
+				<li><a href="http://www.genecards.org/cgi-bin/carddisp.pl?gene={{ gene.symbol }}">GeneCards</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="yui3-u-2-3 yui-tweak details-column large-column">
+		<div class="no-left-margin">
+			<h2>Changes associated with this gene</h2>
+			{% render_table table 'atlas/table.html' %}
+		</div>
+        {% if ortholog_changes.paginator.count > 0 %}
+		<div class="no-left-margin">
+			<h2>Changes associated with the orthologs of this gene</h2>
+            {% render_table ortholog_changes 'atlas/table.html' %}
+		</div>
+        {% endif %}
+		{% if go.count > 0 %}
+		<div class="no-left-margin">
+			<h2>GO Terms</h2>
+			<table class="go-table">
+				<thead>
+					<tr><th>GO ID</th><th>GO Term</th><th>GO Category</th></tr>
+				</thead>
+				<tbody>
+				{% for g in go.all %}
+					<tr {% if forloop.counter > 6 %}class="hidden-row"{% endif %}>
+						<td><a href="http://amigo.geneontology.org/cgi-bin/amigo/go.cgi?view=details&depth=1&query={{ g.term.acc }}">{{ g.term.acc }}</a></td>
+						<td>{{ g.term.name }}</td>
+						<td>{{ g.term.term_type }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+				{% if go.count > 6 %}
+				<tfoot>
+					<tr><td colspan="4"></td></tr>
+				</tfoot>
+				{% endif %}
+			</table>
+		</div>
+		{% endif %}
+	</div>
+	
+{% endblock %}

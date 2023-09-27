@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block content %}
+
+	<h1>Gene Ontology Term Tools</h1>
+
+	<div class="yui3-u-1-2">
+		<div class="page-section">
+			<h2>GO term to corresponding change</h2>
+			<p>Enter in the format <strong>GO:0005739</strong>. You must include the in front of the ID.</p>
+			<form method="get" action="{% url 'go_db.views.go_to_changes' %}">
+				<input type="text" name="id" value="" />
+				<button class="button blue-button" type="submit">Find Changes</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="yui3-u-1-2 yui-tweak">
+		<div class="page-section">
+			<h2>GO Term occurrences</h2>
+			<p>Not yet implemented</p>
+		</div>
+	</div>
+
+{% endblock %}

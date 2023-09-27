@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Thank you for your submission</title>
+        <link href="/static/css/hagr.css" rel="stylesheet">
+    </head>
+    <body>
+        <a href="{{db.url}}"><img src="/static/images/{{ db.short_name }}.png" alt="{{ db.name }}"></a>
+        <div class="highlight-box" style="width: 50%; margin: 2em auto">
+            <h1>Submission Complete</h1>
+            <p>Thank you for your submission, we have recorded it and if you have supplied an email address, we will contact you if it is added to the database.</p>
+            <p><a href="{{ db.url }}">Return to {{ db.name }}</a></p>
+        </div>
+    </body>
+</html>

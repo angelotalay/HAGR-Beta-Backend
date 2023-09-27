@@ -1,0 +1,100 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            import
+        </li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module">
+            {% if invalid_fields|length > 0 %}
+            <h2>Invalid columns</h2>
+            <p>The following columns will not be used during the import as they do not match a column in the database. Please check spelling and for incorrect spaces. All columns names are lower case.</p>
+            <ul>
+            {% for c in invalid_fields %}
+                <li>{{ c }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+
+
+            {% if op.ignore|length > 0 %}
+           <h2>Entries that will not be imported ({{ op.ignore|length }})</h2>
+           <p>The following entries will not be imported as they have error(s). Please check these and ensure that any errors are not going to cause issues with your import</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    {% for k in header %}
+                        <th>{{k}}</th>
+                    {% endfor %}
+                        <th>Error</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in op.ignore %}
+                        <tr>
+                            {% for k,v in r.0.items %}
+                                <td>{{v}}</td>
+                            {% endfor %}
+                            <td>{{r.1}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+           {% endif %}
+
+            <h2>The following new changes will be imported ({{op.new|length}})</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    {% for k in header %}
+                        <th>{{k}}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in op.new %}
+                        <tr>
+                            {% for k,v in r.items %}
+                                <td>{{v}}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="module" style="overflow: auto; padding: 1em;">
+            <form style="width: 49%; float: left;" id="import-uploadform" action="{% url 'admin:atlas_import_changes' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                <input type="file" name="datafile" />
+                <button type="submit" class="button">Re-submit</button>
+            </form>
+            <form style="width: 49%; float: left;" id="import-continueform" action="{% url 'admin:atlas_import_changes_complete' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                <input type="hidden" value="{{ data }}" name="data" />
+                <button type="submit" class="button blue-button" style="float:right">Import</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

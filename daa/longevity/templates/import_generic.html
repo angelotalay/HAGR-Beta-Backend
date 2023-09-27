@@ -1,0 +1,77 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>import</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2>Data import</h2>
+            <p>This form allows you to import data into the LongevityMap.</p>
+            <div class="alert alert-info">
+                <p>You will need to clear the database before you load the data. Please use the following SQL script (through PhpMyAdmin or similar) to reset the database. This will not clear the references in LibAge which will need to be cleared seperatly afterwards.</p>
+                <p><a href="/static/admin/scripts/reset.sql">reset.sql</a></p>
+            </div>
+            <div class="well">
+                <p>Select your tab seperated text file and submit</p>
+                <form id="import-uploadform" action="{% url 'admin:longevity_csvimport' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                    <input type="file" name="datafile" />
+                    <button type="submit" class="button blue-button">Submit</button>
+                </form>
+            </div>
+            <h2>Formatting your data</h2>
+            <p>Please ensure that the following instructions are followed:
+            <ol>
+                <li>All column headers are required.</li>
+                <li>Column headers are case sensitive. Any mispelling will cause the file to be rejected.</li>
+                <li>Columns must be tab separated</li>
+                <li>Data is perfered to be in UTF-8 for correct support of mathmatical, scientific and international charecters though ASCII can be used (If ASCII is used on interntional charecters they will be replaced by a ?).</li>
+            </ol>
+            <h3>Accepted columns</h3>
+            <dl>
+                <dt>population</dt>
+                <dd>The population on which the study was performed (e.g. Dutch)</dd>
+                <dt>association</dt>
+                <dd>Either: <b>significant</b> or <b>nonsignificant</b></dd>
+                <dt>variants</dt>
+                <dd>Comma separated list of variant symbols</dd>
+                <dt>gene symbol</dt>
+                <dd>The symbol of the gene studied</dd>
+                <dt>study design</dt>
+                <dd>A textual description of the study</dd>
+                <dt>conclusions</dt>
+                <dd>A textual description of the conclusions</dd>
+                <dt>pubmed</dt>
+                <dd>The PubMed ID of the study</dd>
+                <dt>location</dt>
+                <dd>A genomic location studied</dd>
+                <dt>P value for all</dt>
+                <dd>One or more P values for the study</dd>
+                <dt>Sample size</dt>
+                <dd>The size of the sample studied</dd>
+            </dl>
+        </div>
+    </div>
+{% endblock %}

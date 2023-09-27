@@ -1,0 +1,1168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uniprot xmlns="http://uniprot.org/uniprot" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://uniprot.org/uniprot http://www.uniprot.org/support/docs/uniprot.xsd">
+  <entry dataset="Swiss-Prot" created="1986-07-21" modified="2012-07-11" version="103">
+    <accession>P63261</accession>
+    <accession>A8K7C2</accession>
+    <accession>P02571</accession>
+    <accession>P14104</accession>
+    <accession>P99022</accession>
+    <accession>Q5U032</accession>
+    <accession>Q96E67</accession>
+    <name>ACTG_HUMAN</name>
+    <protein>
+      <recommendedName>
+        <fullName>Actin, cytoplasmic 2</fullName>
+      </recommendedName>
+      <alternativeName>
+        <fullName>Gamma-actin</fullName>
+      </alternativeName>
+      <component>
+        <recommendedName>
+          <fullName>Actin, cytoplasmic 2, N-terminally processed</fullName>
+        </recommendedName>
+      </component>
+    </protein>
+    <gene>
+      <name type="primary">ACTG1</name>
+      <name type="synonym">ACTB</name>
+      <name type="synonym">ACTG</name>
+    </gene>
+    <organism>
+      <name type="scientific">Homo sapiens</name>
+      <name type="common">Human</name>
+      <dbReference type="NCBI Taxonomy" id="9606"/>
+      <lineage>
+        <taxon>Eukaryota</taxon>
+        <taxon>Metazoa</taxon>
+        <taxon>Chordata</taxon>
+        <taxon>Craniata</taxon>
+        <taxon>Vertebrata</taxon>
+        <taxon>Euteleostomi</taxon>
+        <taxon>Mammalia</taxon>
+        <taxon>Eutheria</taxon>
+        <taxon>Euarchontoglires</taxon>
+        <taxon>Primates</taxon>
+        <taxon>Haplorrhini</taxon>
+        <taxon>Catarrhini</taxon>
+        <taxon>Hominidae</taxon>
+        <taxon>Homo</taxon>
+      </lineage>
+    </organism>
+    <reference key="1">
+      <citation type="journal article" date="1986" name="Nucleic Acids Res." volume="14" first="5275" last="5294">
+        <title>Nucleotide sequence of the human gamma cytoskeletal actin mRNA: anomalous evolution of vertebrate non-muscle actin genes.</title>
+        <authorList>
+          <person name="Erba H.P."/>
+          <person name="Gunning P."/>
+          <person name="Kedes L."/>
+        </authorList>
+        <dbReference type="MEDLINE" id="86286543"/>
+        <dbReference type="PubMed" id="3737401"/>
+        <dbReference type="DOI" id="10.1093/nar/14.13.5275"/>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [MRNA]</scope>
+    </reference>
+    <reference key="2">
+      <citation type="journal article" date="1988" name="Mol. Cell. Biol." volume="8" first="1775" last="1789">
+        <title>Structure, chromosome location, and expression of the human gamma-actin gene: differential evolution, location, and expression of the cytoskeletal beta- and gamma-actin genes.</title>
+        <authorList>
+          <person name="Erba H.P."/>
+          <person name="Eddy R."/>
+          <person name="Shows T."/>
+          <person name="Kedes L."/>
+          <person name="Gunning P."/>
+        </authorList>
+        <dbReference type="MEDLINE" id="88246448"/>
+        <dbReference type="PubMed" id="2837653"/>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA]</scope>
+    </reference>
+    <reference key="3">
+      <citation type="journal article" date="2004" name="Nat. Genet." volume="36" first="40" last="45">
+        <title>Complete sequencing and characterization of 21,243 full-length human cDNAs.</title>
+        <authorList>
+          <person name="Ota T."/>
+          <person name="Suzuki Y."/>
+          <person name="Nishikawa T."/>
+          <person name="Otsuki T."/>
+          <person name="Sugiyama T."/>
+          <person name="Irie R."/>
+          <person name="Wakamatsu A."/>
+          <person name="Hayashi K."/>
+          <person name="Sato H."/>
+          <person name="Nagai K."/>
+          <person name="Kimura K."/>
+          <person name="Makita H."/>
+          <person name="Sekine M."/>
+          <person name="Obayashi M."/>
+          <person name="Nishi T."/>
+          <person name="Shibahara T."/>
+          <person name="Tanaka T."/>
+          <person name="Ishii S."/>
+          <person name="Yamamoto J."/>
+          <person name="Saito K."/>
+          <person name="Kawai Y."/>
+          <person name="Isono Y."/>
+          <person name="Nakamura Y."/>
+          <person name="Nagahari K."/>
+          <person name="Murakami K."/>
+          <person name="Yasuda T."/>
+          <person name="Iwayanagi T."/>
+          <person name="Wagatsuma M."/>
+          <person name="Shiratori A."/>
+          <person name="Sudo H."/>
+          <person name="Hosoiri T."/>
+          <person name="Kaku Y."/>
+          <person name="Kodaira H."/>
+          <person name="Kondo H."/>
+          <person name="Sugawara M."/>
+          <person name="Takahashi M."/>
+          <person name="Kanda K."/>
+          <person name="Yokoi T."/>
+          <person name="Furuya T."/>
+          <person name="Kikkawa E."/>
+          <person name="Omura Y."/>
+          <person name="Abe K."/>
+          <person name="Kamihara K."/>
+          <person name="Katsuta N."/>
+          <person name="Sato K."/>
+          <person name="Tanikawa M."/>
+          <person name="Yamazaki M."/>
+          <person name="Ninomiya K."/>
+          <person name="Ishibashi T."/>
+          <person name="Yamashita H."/>
+          <person name="Murakawa K."/>
+          <person name="Fujimori K."/>
+          <person name="Tanai H."/>
+          <person name="Kimata M."/>
+          <person name="Watanabe M."/>
+          <person name="Hiraoka S."/>
+          <person name="Chiba Y."/>
+          <person name="Ishida S."/>
+          <person name="Ono Y."/>
+          <person name="Takiguchi S."/>
+          <person name="Watanabe S."/>
+          <person name="Yosida M."/>
+          <person name="Hotuta T."/>
+          <person name="Kusano J."/>
+          <person name="Kanehori K."/>
+          <person name="Takahashi-Fujii A."/>
+          <person name="Hara H."/>
+          <person name="Tanase T.-O."/>
+          <person name="Nomura Y."/>
+          <person name="Togiya S."/>
+          <person name="Komai F."/>
+          <person name="Hara R."/>
+          <person name="Takeuchi K."/>
+          <person name="Arita M."/>
+          <person name="Imose N."/>
+          <person name="Musashino K."/>
+          <person name="Yuuki H."/>
+          <person name="Oshima A."/>
+          <person name="Sasaki N."/>
+          <person name="Aotsuka S."/>
+          <person name="Yoshikawa Y."/>
+          <person name="Matsunawa H."/>
+          <person name="Ichihara T."/>
+          <person name="Shiohata N."/>
+          <person name="Sano S."/>
+          <person name="Moriya S."/>
+          <person name="Momiyama H."/>
+          <person name="Satoh N."/>
+          <person name="Takami S."/>
+          <person name="Terashima Y."/>
+          <person name="Suzuki O."/>
+          <person name="Nakagawa S."/>
+          <person name="Senoh A."/>
+          <person name="Mizoguchi H."/>
+          <person name="Goto Y."/>
+          <person name="Shimizu F."/>
+          <person name="Wakebe H."/>
+          <person name="Hishigaki H."/>
+          <person name="Watanabe T."/>
+          <person name="Sugiyama A."/>
+          <person name="Takemoto M."/>
+          <person name="Kawakami B."/>
+          <person name="Yamazaki M."/>
+          <person name="Watanabe K."/>
+          <person name="Kumagai A."/>
+          <person name="Itakura S."/>
+          <person name="Fukuzumi Y."/>
+          <person name="Fujimori Y."/>
+          <person name="Komiyama M."/>
+          <person name="Tashiro H."/>
+          <person name="Tanigami A."/>
+          <person name="Fujiwara T."/>
+          <person name="Ono T."/>
+          <person name="Yamada K."/>
+          <person name="Fujii Y."/>
+          <person name="Ozaki K."/>
+          <person name="Hirao M."/>
+          <person name="Ohmori Y."/>
+          <person name="Kawabata A."/>
+          <person name="Hikiji T."/>
+          <person name="Kobatake N."/>
+          <person name="Inagaki H."/>
+          <person name="Ikema Y."/>
+          <person name="Okamoto S."/>
+          <person name="Okitani R."/>
+          <person name="Kawakami T."/>
+          <person name="Noguchi S."/>
+          <person name="Itoh T."/>
+          <person name="Shigeta K."/>
+          <person name="Senba T."/>
+          <person name="Matsumura K."/>
+          <person name="Nakajima Y."/>
+          <person name="Mizuno T."/>
+          <person name="Morinaga M."/>
+          <person name="Sasaki M."/>
+          <person name="Togashi T."/>
+          <person name="Oyama M."/>
+          <person name="Hata H."/>
+          <person name="Watanabe M."/>
+          <person name="Komatsu T."/>
+          <person name="Mizushima-Sugano J."/>
+          <person name="Satoh T."/>
+          <person name="Shirai Y."/>
+          <person name="Takahashi Y."/>
+          <person name="Nakagawa K."/>
+          <person name="Okumura K."/>
+          <person name="Nagase T."/>
+          <person name="Nomura N."/>
+          <person name="Kikuchi H."/>
+          <person name="Masuho Y."/>
+          <person name="Yamashita R."/>
+          <person name="Nakai K."/>
+          <person name="Yada T."/>
+          <person name="Nakamura Y."/>
+          <person name="Ohara O."/>
+          <person name="Isogai T."/>
+          <person name="Sugano S."/>
+        </authorList>
+        <dbReference type="PubMed" id="14702039"/>
+        <dbReference type="DOI" id="10.1038/ng1285"/>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA]</scope>
+    </reference>
+    <reference key="4">
+      <citation type="submission" date="2004-10" db="EMBL/GenBank/DDBJ databases">
+        <title>Cloning of human full-length CDSs in BD Creator(TM) system donor vector.</title>
+        <authorList>
+          <person name="Kalnine N."/>
+          <person name="Chen X."/>
+          <person name="Rolfs A."/>
+          <person name="Halleck A."/>
+          <person name="Hines L."/>
+          <person name="Eisenstein S."/>
+          <person name="Koundinya M."/>
+          <person name="Raphael J."/>
+          <person name="Moreira D."/>
+          <person name="Kelley T."/>
+          <person name="LaBaer J."/>
+          <person name="Lin Y."/>
+          <person name="Phelan M."/>
+          <person name="Farmer A."/>
+        </authorList>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA]</scope>
+    </reference>
+    <reference key="5">
+      <citation type="journal article" date="2004" name="Genome Res." volume="14" first="2121" last="2127">
+        <title>The status, quality, and expansion of the NIH full-length cDNA project: the Mammalian Gene Collection (MGC).</title>
+        <authorList>
+          <consortium name="The MGC Project Team"/>
+        </authorList>
+        <dbReference type="PubMed" id="15489334"/>
+        <dbReference type="DOI" id="10.1101/gr.2596504"/>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [LARGE SCALE MRNA]</scope>
+      <source>
+        <tissue>B-cell</tissue>
+        <tissue>Eye</tissue>
+        <tissue>Lung</tissue>
+        <tissue>Ovary</tissue>
+        <tissue>Placenta</tissue>
+        <tissue>Skin</tissue>
+        <tissue>Uterus</tissue>
+      </source>
+    </reference>
+    <reference key="6">
+      <citation type="journal article" date="2003" name="Nat. Biotechnol." volume="21" first="566" last="569">
+        <title>Exploring proteomes and analyzing protein processing by mass spectrometric identification of sorted N-terminal peptides.</title>
+        <authorList>
+          <person name="Gevaert K."/>
+          <person name="Goethals M."/>
+          <person name="Martens L."/>
+          <person name="Van Damme J."/>
+          <person name="Staes A."/>
+          <person name="Thomas G.R."/>
+          <person name="Vandekerckhove J."/>
+        </authorList>
+        <dbReference type="MEDLINE" id="22608298"/>
+        <dbReference type="PubMed" id="12665801"/>
+        <dbReference type="DOI" id="10.1038/nbt810"/>
+      </citation>
+      <scope>PROTEIN SEQUENCE OF 2-28</scope>
+      <source>
+        <tissue>Platelet</tissue>
+      </source>
+    </reference>
+    <reference key="7">
+      <citation type="submission" date="2005-06" db="UniProtKB">
+        <authorList>
+          <person name="Bienvenut W.V."/>
+        </authorList>
+      </citation>
+      <scope>PROTEIN SEQUENCE OF 2-18; 29-37; 40-50; 85-113; 148-177; 184-191; 197-206; 239-254; 292-312 AND 316-326</scope>
+      <scope>CLEAVAGE OF INITIATOR METHIONINE</scope>
+      <scope>ACETYLATION AT GLU-2</scope>
+      <scope>MASS SPECTROMETRY</scope>
+      <source>
+        <tissue>B-cell lymphoma</tissue>
+      </source>
+    </reference>
+    <reference key="8">
+      <citation type="submission" date="2009-06" db="UniProtKB">
+        <authorList>
+          <person name="Bienvenut W.V."/>
+          <person name="Lilla S."/>
+          <person name="von Kriegsheim A."/>
+          <person name="Lempens A."/>
+          <person name="Kolch W."/>
+          <person name="Dozynkiewicz M."/>
+          <person name="Norman J.C."/>
+        </authorList>
+      </citation>
+      <scope>PROTEIN SEQUENCE OF 2-116; 119-210; 216-254 AND 291-372</scope>
+      <scope>CLEAVAGE OF INITIATOR METHIONINE</scope>
+      <scope>ACETYLATION AT GLU-2</scope>
+      <scope>METHYLATION AT HIS-73</scope>
+      <scope>MASS SPECTROMETRY</scope>
+      <source>
+        <tissue>Ovarian carcinoma</tissue>
+      </source>
+    </reference>
+    <reference key="9">
+      <citation type="submission" date="2007-03" db="UniProtKB">
+        <authorList>
+          <person name="Lubec G."/>
+          <person name="Afjehi-Sadat L."/>
+        </authorList>
+      </citation>
+      <scope>PROTEIN SEQUENCE OF 29-39; 85-113; 239-254 AND 292-312</scope>
+      <scope>MASS SPECTROMETRY</scope>
+      <source>
+        <tissue>Brain</tissue>
+        <tissue>Cajal-Retzius cell</tissue>
+      </source>
+    </reference>
+    <reference key="10">
+      <citation type="journal article" date="1987" name="Proc. Natl. Acad. Sci. U.S.A." volume="84" first="2575" last="2579">
+        <title>Gamma-actin: unusual mRNA 3'-untranslated sequence conservation and amino acid substitutions that may be cancer related.</title>
+        <authorList>
+          <person name="Chou C.C."/>
+          <person name="Davis R.C."/>
+          <person name="Fuller M.L."/>
+          <person name="Slovin J.P."/>
+          <person name="Wong A."/>
+          <person name="Wright J."/>
+          <person name="Kania S."/>
+          <person name="Shaked R."/>
+          <person name="Gatti R.A."/>
+          <person name="Salser W.A."/>
+        </authorList>
+        <dbReference type="MEDLINE" id="87204173"/>
+        <dbReference type="PubMed" id="3472224"/>
+        <dbReference type="DOI" id="10.1073/pnas.84.9.2575"/>
+      </citation>
+      <scope>NUCLEOTIDE SEQUENCE [MRNA] OF 144-375</scope>
+    </reference>
+    <reference key="11">
+      <citation type="journal article" date="2007" name="Cell" volume="131" first="1190" last="1203">
+        <title>Global survey of phosphotyrosine signaling identifies oncogenic kinases in lung cancer.</title>
+        <authorList>
+          <person name="Rikova K."/>
+          <person name="Guo A."/>
+          <person name="Zeng Q."/>
+          <person name="Possemato A."/>
+          <person name="Yu J."/>
+          <person name="Haack H."/>
+          <person name="Nardone J."/>
+          <person name="Lee K."/>
+          <person name="Reeves C."/>
+          <person name="Li Y."/>
+          <person name="Hu Y."/>
+          <person name="Tan Z."/>
+          <person name="Stokes M."/>
+          <person name="Sullivan L."/>
+          <person name="Mitchell J."/>
+          <person name="Wetzel R."/>
+          <person name="Macneill J."/>
+          <person name="Ren J.M."/>
+          <person name="Yuan J."/>
+          <person name="Bakalarski C.E."/>
+          <person name="Villen J."/>
+          <person name="Kornhauser J.M."/>
+          <person name="Smith B."/>
+          <person name="Li D."/>
+          <person name="Zhou X."/>
+          <person name="Gygi S.P."/>
+          <person name="Gu T.-L."/>
+          <person name="Polakiewicz R.D."/>
+          <person name="Rush J."/>
+          <person name="Comb M.J."/>
+        </authorList>
+        <dbReference type="PubMed" id="18083107"/>
+        <dbReference type="DOI" id="10.1016/j.cell.2007.11.025"/>
+      </citation>
+      <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT TYR-198 AND TYR-294</scope>
+      <scope>MASS SPECTROMETRY</scope>
+      <source>
+        <tissue>Lung carcinoma</tissue>
+      </source>
+    </reference>
+    <reference key="12">
+      <citation type="journal article" date="2008" name="J. Proteome Res." volume="7" first="526" last="534">
+        <title>Phosphoproteome of resting human platelets.</title>
+        <authorList>
+          <person name="Zahedi R.P."/>
+          <person name="Lewandrowski U."/>
+          <person name="Wiesner J."/>
+          <person name="Wortelkamp S."/>
+          <person name="Moebius J."/>
+          <person name="Schuetz C."/>
+          <person name="Walter U."/>
+          <person name="Gambaryan S."/>
+          <person name="Sickmann A."/>
+        </authorList>
+        <dbReference type="PubMed" id="18088087"/>
+        <dbReference type="DOI" id="10.1021/pr0704130"/>
+      </citation>
+      <scope>PHOSPHORYLATION [LARGE SCALE ANALYSIS] AT THR-318</scope>
+      <scope>MASS SPECTROMETRY</scope>
+      <source>
+        <tissue>Platelet</tissue>
+      </source>
+    </reference>
+    <reference key="13">
+      <citation type="journal article" date="2003" name="Am. J. Hum. Genet." volume="73" first="1082" last="1091">
+        <title>Mutations in the gamma-actin gene (ACTG1) are associated with dominant progressive deafness (DFNA20/26).</title>
+        <authorList>
+          <person name="Zhu M."/>
+          <person name="Yang T."/>
+          <person name="Wei S."/>
+          <person name="DeWan A.T."/>
+          <person name="Morell R.J."/>
+          <person name="Elfenbein J.L."/>
+          <person name="Fisher R.A."/>
+          <person name="Leal S.M."/>
+          <person name="Smith R.J.H."/>
+          <person name="Friderici K.H."/>
+        </authorList>
+        <dbReference type="PubMed" id="13680526"/>
+        <dbReference type="DOI" id="10.1086/379286"/>
+      </citation>
+      <scope>VARIANTS DFNA20 ILE-89; MET-118; LEU-264 AND ALA-332</scope>
+    </reference>
+    <reference key="14">
+      <citation type="journal article" date="2003" name="J. Med. Genet." volume="40" first="879" last="884">
+        <title>A mutation in the gamma actin 1 (ACTG1) gene causes autosomal dominant hearing loss (DFNA20/26).</title>
+        <authorList>
+          <person name="van Wijk E."/>
+          <person name="Krieger E."/>
+          <person name="Kemperman M.H."/>
+          <person name="De Leenheer E.M.R."/>
+          <person name="Huygen P.L.M."/>
+          <person name="Cremers C.W.R.J."/>
+          <person name="Cremers F.P.M."/>
+          <person name="Kremer H."/>
+        </authorList>
+        <dbReference type="PubMed" id="14684684"/>
+        <dbReference type="DOI" id="10.1136/jmg.40.12.879"/>
+      </citation>
+      <scope>VARIANT DFNA20 ILE-278</scope>
+    </reference>
+    <reference key="15">
+      <citation type="journal article" date="2006" name="Eur. J. Hum. Genet." volume="14" first="1097" last="1105">
+        <title>A novel missense mutation in ACTG1 causes dominant deafness in a Norwegian DFNA20/26 family, but ACTG1 mutations are not frequent among families with hereditary hearing impairment.</title>
+        <authorList>
+          <person name="Rendtorff N.D."/>
+          <person name="Zhu M."/>
+          <person name="Fagerheim T."/>
+          <person name="Antal T.L."/>
+          <person name="Jones M."/>
+          <person name="Teslovich T.M."/>
+          <person name="Gillanders E.M."/>
+          <person name="Barmada M."/>
+          <person name="Teig E."/>
+          <person name="Trent J.M."/>
+          <person name="Friderici K.H."/>
+          <person name="Stephan D.A."/>
+          <person name="Tranebjaerg L."/>
+        </authorList>
+        <dbReference type="PubMed" id="16773128"/>
+        <dbReference type="DOI" id="10.1038/sj.ejhg.5201670"/>
+      </citation>
+      <scope>VARIANT DFNA20 ALA-370</scope>
+      <scope>CHARACTERIZATION OF VARIANT DFNA20 ALA-370</scope>
+    </reference>
+    <reference key="16">
+      <citation type="journal article" date="2008" name="J. Genet. Genomics" volume="35" first="553" last="558">
+        <title>Novel ACTG1 mutation causing autosomal dominant non-syndromic hearing impairment in a Chinese family.</title>
+        <authorList>
+          <person name="Liu P."/>
+          <person name="Li H."/>
+          <person name="Ren X."/>
+          <person name="Mao H."/>
+          <person name="Zhu Q."/>
+          <person name="Zhu Z."/>
+          <person name="Yang R."/>
+          <person name="Yuan W."/>
+          <person name="Liu J."/>
+          <person name="Wang Q."/>
+          <person name="Liu M."/>
+        </authorList>
+        <dbReference type="PubMed" id="18804074"/>
+        <dbReference type="DOI" id="10.1016/S1673-8527(08)60075-2"/>
+      </citation>
+      <scope>VARIANT DFNA20 VAL-122</scope>
+    </reference>
+    <reference key="17">
+      <citation type="journal article" date="2009" name="Hum. Mol. Genet." volume="18" first="3075" last="3089">
+        <title>In vivo and in vitro effects of two novel gamma-actin (ACTG1) mutations that cause DFNA20/26 hearing impairment.</title>
+        <authorList>
+          <person name="Morin M."/>
+          <person name="Bryan K.E."/>
+          <person name="Mayo-Merino F."/>
+          <person name="Goodyear R."/>
+          <person name="Mencia A."/>
+          <person name="Modamio-Hoybjor S."/>
+          <person name="del Castillo I."/>
+          <person name="Cabalka J.M."/>
+          <person name="Richardson G."/>
+          <person name="Moreno F."/>
+          <person name="Rubenstein P.A."/>
+          <person name="Moreno-Pelayo M.A."/>
+        </authorList>
+        <dbReference type="PubMed" id="19477959"/>
+        <dbReference type="DOI" id="10.1093/hmg/ddp249"/>
+      </citation>
+      <scope>VARIANTS DFNA20 ASN-118 AND LYS-241</scope>
+    </reference>
+    <reference key="18">
+      <citation type="journal article" date="2012" name="Nat. Genet." volume="44" first="440" last="444">
+        <title>De novo mutations in the actin genes ACTB and ACTG1 cause Baraitser-Winter syndrome.</title>
+        <authorList>
+          <person name="Riviere J.B."/>
+          <person name="van Bon B.W."/>
+          <person name="Hoischen A."/>
+          <person name="Kholmanskikh S.S."/>
+          <person name="O'Roak B.J."/>
+          <person name="Gilissen C."/>
+          <person name="Gijsen S."/>
+          <person name="Sullivan C.T."/>
+          <person name="Christian S.L."/>
+          <person name="Abdul-Rahman O.A."/>
+          <person name="Atkin J.F."/>
+          <person name="Chassaing N."/>
+          <person name="Drouin-Garraud V."/>
+          <person name="Fry A.E."/>
+          <person name="Fryns J.P."/>
+          <person name="Gripp K.W."/>
+          <person name="Kempers M."/>
+          <person name="Kleefstra T."/>
+          <person name="Mancini G.M."/>
+          <person name="Nowaczyk M.J."/>
+          <person name="van Ravenswaaij-Arts C.M."/>
+          <person name="Roscioli T."/>
+          <person name="Marble M."/>
+          <person name="Rosenfeld J.A."/>
+          <person name="Siu V.M."/>
+          <person name="de Vries B.B."/>
+          <person name="Shendure J."/>
+          <person name="Verloes A."/>
+          <person name="Veltman J.A."/>
+          <person name="Brunner H.G."/>
+          <person name="Ross M.E."/>
+          <person name="Pilz D.T."/>
+          <person name="Dobyns W.B."/>
+        </authorList>
+        <dbReference type="PubMed" id="22366783"/>
+        <dbReference type="DOI" id="10.1038/ng.1091"/>
+      </citation>
+      <scope>VARIANTS BRWS2 ILE-120; VAL-135; PHE-155; LYS-203; TRP-254 AND TRP-256</scope>
+    </reference>
+    <comment type="subunit">
+      <text>Polymerization of globular actin (G-actin) leads to a structural filament (F-actin) in the form of a two-stranded helix. Each actin can bind to 4 others.</text>
+    </comment>
+    <comment type="interaction">
+      <interactant intactId="EBI-351292"/>
+      <interactant intactId="EBI-351292"/>
+      <organismsDiffer>false</organismsDiffer>
+      <experiments>2</experiments>
+    </comment>
+    <comment type="interaction">
+      <interactant intactId="EBI-351292"/>
+      <interactant intactId="EBI-351218">
+        <id>Q9Y281</id>
+        <label>CFL2</label>
+      </interactant>
+      <organismsDiffer>false</organismsDiffer>
+      <experiments>2</experiments>
+    </comment>
+    <comment type="interaction">
+      <interactant intactId="EBI-351292"/>
+      <interactant intactId="EBI-744248">
+        <id>P40692</id>
+        <label>MLH1</label>
+      </interactant>
+      <organismsDiffer>false</organismsDiffer>
+      <experiments>7</experiments>
+    </comment>
+    <comment type="subcellular location">
+      <subcellularLocation>
+        <location>Cytoplasm</location>
+        <location>Cytoskeleton</location>
+      </subcellularLocation>
+    </comment>
+    <comment type="PTM">
+      <text>The methylhistidine determined by Bienvenut et al is assumed to be the tele-methylhistidine isomer by similarity to the mouse ortholog.</text>
+    </comment>
+    <comment type="PTM">
+      <text>Oxidation of Met-44 by MICALs (MICAL1, MICAL2 or MICAL3) to form methionine sulfoxide promotes actin filament depolymerization. Methionine sulfoxide is produced stereospecifically, but it is not known whether the (S)-S-oxide or the (R)-S-oxide is produced (By similarity).</text>
+    </comment>
+    <comment type="disease">
+      <text evidence="1 2 3 4 5">Defects in ACTG1 are the cause of deafness autosomal dominant type 20 (DFNA20) [MIM:604717]; also called autosomal dominant deafness type 26 (DFNA26). DFNA20 is a form of sensorineural hearing loss. Sensorineural deafness results from damage to the neural receptors of the inner ear, the nerve pathways to the brain, or the area of the brain that receives sound information.</text>
+    </comment>
+    <comment type="disease">
+      <text evidence="6">Defects in ACTG1 are the cause of Baraitser-Winter syndrome type 2 (BRWS2) [MIM:614583]. A rare developmental disorder characterized by the combination of congenital ptosis, high-arched eyebrows, hypertelorism, ocular colobomata, and a brain malformation consisting of anterior-predominant lissencephaly. Other typical features include postnatal short stature and microcephaly, intellectual disability, seizures, and hearing loss.</text>
+    </comment>
+    <comment type="miscellaneous">
+      <text>In vertebrates 3 main groups of actin isoforms, alpha, beta and gamma have been identified. The alpha actins are found in muscle tissues and are a major constituent of the contractile apparatus. The beta and gamma actins coexist in most cell types as components of the cytoskeleton and as mediators of internal cell motility.</text>
+    </comment>
+    <comment type="similarity">
+      <text>Belongs to the actin family.</text>
+    </comment>
+    <dbReference type="EMBL" id="X04098">
+      <property type="protein sequence ID" value="CAA27723.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="M19283">
+      <property type="protein sequence ID" value="AAA51579.1"/>
+      <property type="molecule type" value="Genomic_DNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="AK291937">
+      <property type="protein sequence ID" value="BAF84626.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BT019856">
+      <property type="protein sequence ID" value="AAV38659.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC000292">
+      <property type="protein sequence ID" value="AAH00292.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC001920">
+      <property type="protein sequence ID" value="AAH01920.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC007442">
+      <property type="protein sequence ID" value="AAH07442.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC009848">
+      <property type="protein sequence ID" value="AAH09848.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC010999">
+      <property type="protein sequence ID" value="AAH10999.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC012050">
+      <property type="protein sequence ID" value="AAH12050.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC015005">
+      <property type="protein sequence ID" value="AAH15005.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC015695">
+      <property type="protein sequence ID" value="AAH15695.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC015779">
+      <property type="protein sequence ID" value="AAH15779.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC018774">
+      <property type="protein sequence ID" value="AAH18774.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="BC053572">
+      <property type="protein sequence ID" value="AAH53572.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="EMBL" id="M16247">
+      <property type="protein sequence ID" value="AAA51580.1"/>
+      <property type="molecule type" value="mRNA"/>
+    </dbReference>
+    <dbReference type="IPI" id="IPI00021440"/>
+    <dbReference type="PIR" id="A28098">
+      <property type="entry name" value="ATHUG"/>
+    </dbReference>
+    <dbReference type="PIR" id="JC5818">
+      <property type="entry name" value="JC5818"/>
+    </dbReference>
+    <dbReference type="RefSeq" id="NP_001186883.1">
+      <property type="nucleotide sequence ID" value="NM_001199954.1"/>
+    </dbReference>
+    <dbReference type="RefSeq" id="NP_001605.1">
+      <property type="nucleotide sequence ID" value="NM_001614.3"/>
+    </dbReference>
+    <dbReference type="UniGene" id="Hs.514581"/>
+    <dbReference type="UniGene" id="Hs.731391"/>
+    <dbReference type="ProteinModelPortal" id="P63261"/>
+    <dbReference type="SMR" id="P63261">
+      <property type="residue range" value="2-375"/>
+    </dbReference>
+    <dbReference type="IntAct" id="P63261">
+      <property type="interactions" value="32"/>
+    </dbReference>
+    <dbReference type="MINT" id="MINT-4998686"/>
+    <dbReference type="STRING" id="P63261"/>
+    <dbReference type="PhosphoSite" id="P63261"/>
+    <dbReference type="DMDM" id="54036678"/>
+    <dbReference type="DOSAC-COBS-2DPAGE" id="P60709_OR_P63261"/>
+    <dbReference type="DOSAC-COBS-2DPAGE" id="P63261"/>
+    <dbReference type="OGP" id="P63261"/>
+    <dbReference type="PMMA-2DPAGE" id="P63261"/>
+    <dbReference type="REPRODUCTION-2DPAGE" id="P63261"/>
+    <dbReference type="SWISS-2DPAGE" id="P63261"/>
+    <dbReference type="PRIDE" id="P63261"/>
+    <dbReference type="DNASU" id="71"/>
+    <dbReference type="Ensembl" id="ENST00000331925">
+      <property type="protein sequence ID" value="ENSP00000331514"/>
+      <property type="gene ID" value="ENSG00000184009"/>
+    </dbReference>
+    <dbReference type="GeneID" id="71"/>
+    <dbReference type="KEGG" id="hsa:71"/>
+    <dbReference type="UCSC" id="uc002kak.2">
+      <property type="organism name" value="human"/>
+    </dbReference>
+    <dbReference type="CTD" id="71"/>
+    <dbReference type="GeneCards" id="GC17M079476"/>
+    <dbReference type="H-InvDB" id="HIX0001479"/>
+    <dbReference type="H-InvDB" id="HIX0199868"/>
+    <dbReference type="HGNC" id="HGNC:144">
+      <property type="gene designation" value="ACTG1"/>
+    </dbReference>
+    <dbReference type="HPA" id="CAB013531"/>
+    <dbReference type="MIM" id="102560">
+      <property type="type" value="gene"/>
+    </dbReference>
+    <dbReference type="MIM" id="604717">
+      <property type="type" value="phenotype"/>
+    </dbReference>
+    <dbReference type="MIM" id="614583">
+      <property type="type" value="phenotype"/>
+    </dbReference>
+    <dbReference type="neXtProt" id="NX_P63261"/>
+    <dbReference type="Orphanet" id="90635">
+      <property type="disease" value="Autosomal dominant nonsyndromic sensorineural deafness type DFNA"/>
+    </dbReference>
+    <dbReference type="PharmGKB" id="PA24468"/>
+    <dbReference type="GeneTree" id="ENSGT00630000089629"/>
+    <dbReference type="HOVERGEN" id="HBG003771"/>
+    <dbReference type="InParanoid" id="P63261"/>
+    <dbReference type="KO" id="K05692"/>
+    <dbReference type="OMA" id="KITAPLE"/>
+    <dbReference type="OrthoDB" id="EOG41JZC9"/>
+    <dbReference type="PhylomeDB" id="P63261"/>
+    <dbReference type="Reactome" id="REACT_111045">
+      <property type="pathway name" value="Developmental Biology"/>
+    </dbReference>
+    <dbReference type="Reactome" id="REACT_111155">
+      <property type="pathway name" value="Cell-Cell communication"/>
+    </dbReference>
+    <dbReference type="Reactome" id="REACT_11123">
+      <property type="pathway name" value="Membrane Trafficking"/>
+    </dbReference>
+    <dbReference type="Reactome" id="REACT_604">
+      <property type="pathway name" value="Hemostasis"/>
+    </dbReference>
+    <dbReference type="NextBio" id="279"/>
+    <dbReference type="PMAP-CutDB" id="P63261"/>
+    <dbReference type="ArrayExpress" id="P63261"/>
+    <dbReference type="Bgee" id="P63261"/>
+    <dbReference type="CleanEx" id="HS_ACTB"/>
+    <dbReference type="CleanEx" id="HS_ACTG1"/>
+    <dbReference type="Genevestigator" id="P63261"/>
+    <dbReference type="GermOnline" id="ENSG00000184009">
+      <property type="organism name" value="Homo sapiens"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0030424">
+      <property type="term" value="C:axon"/>
+      <property type="evidence" value="IEA:Compara"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0005856">
+      <property type="term" value="C:cytoskeleton"/>
+      <property type="evidence" value="TAS:UniProtKB"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0005829">
+      <property type="term" value="C:cytosol"/>
+      <property type="evidence" value="TAS:Reactome"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0031941">
+      <property type="term" value="C:filamentous actin"/>
+      <property type="evidence" value="IEA:Compara"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0030016">
+      <property type="term" value="C:myofibril"/>
+      <property type="evidence" value="IEA:Compara"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0005524">
+      <property type="term" value="F:ATP binding"/>
+      <property type="evidence" value="IEA:UniProtKB-KW"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0005200">
+      <property type="term" value="F:structural constituent of cytoskeleton"/>
+      <property type="evidence" value="IC:UniProtKB"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0034332">
+      <property type="term" value="P:adherens junction organization"/>
+      <property type="evidence" value="TAS:Reactome"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0007411">
+      <property type="term" value="P:axon guidance"/>
+      <property type="evidence" value="TAS:Reactome"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0007596">
+      <property type="term" value="P:blood coagulation"/>
+      <property type="evidence" value="TAS:Reactome"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0034329">
+      <property type="term" value="P:cell junction assembly"/>
+      <property type="evidence" value="TAS:Reactome"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0006928">
+      <property type="term" value="P:cellular component movement"/>
+      <property type="evidence" value="TAS:UniProtKB"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0051592">
+      <property type="term" value="P:response to calcium ion"/>
+      <property type="evidence" value="IEA:Compara"/>
+    </dbReference>
+    <dbReference type="GO" id="GO:0045214">
+      <property type="term" value="P:sarcomere organization"/>
+      <property type="evidence" value="IEA:Compara"/>
+    </dbReference>
+    <dbReference type="InterPro" id="IPR004000">
+      <property type="entry name" value="Actin-like"/>
+    </dbReference>
+    <dbReference type="InterPro" id="IPR020902">
+      <property type="entry name" value="Actin/actin-like_CS"/>
+    </dbReference>
+    <dbReference type="InterPro" id="IPR004001">
+      <property type="entry name" value="Actin_CS"/>
+    </dbReference>
+    <dbReference type="PANTHER" id="PTHR11937">
+      <property type="entry name" value="Actin_like"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <dbReference type="Pfam" id="PF00022">
+      <property type="entry name" value="Actin"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <dbReference type="PRINTS" id="PR00190">
+      <property type="entry name" value="ACTIN"/>
+    </dbReference>
+    <dbReference type="SMART" id="SM00268">
+      <property type="entry name" value="ACTIN"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <dbReference type="PROSITE" id="PS00406">
+      <property type="entry name" value="ACTINS_1"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <dbReference type="PROSITE" id="PS00432">
+      <property type="entry name" value="ACTINS_2"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <dbReference type="PROSITE" id="PS01132">
+      <property type="entry name" value="ACTINS_ACT_LIKE"/>
+      <property type="match status" value="1"/>
+    </dbReference>
+    <proteinExistence type="evidence at protein level"/>
+    <keyword id="KW-0067">ATP-binding</keyword>
+    <keyword id="KW-0007">Acetylation</keyword>
+    <keyword id="KW-0181">Complete proteome</keyword>
+    <keyword id="KW-0963">Cytoplasm</keyword>
+    <keyword id="KW-0206">Cytoskeleton</keyword>
+    <keyword id="KW-0209">Deafness</keyword>
+    <keyword id="KW-0903">Direct protein sequencing</keyword>
+    <keyword id="KW-0225">Disease mutation</keyword>
+    <keyword id="KW-0991">Mental retardation</keyword>
+    <keyword id="KW-0488">Methylation</keyword>
+    <keyword id="KW-1010">Non-syndromic deafness</keyword>
+    <keyword id="KW-0547">Nucleotide-binding</keyword>
+    <keyword id="KW-0558">Oxidation</keyword>
+    <keyword id="KW-0597">Phosphoprotein</keyword>
+    <keyword id="KW-0621">Polymorphism</keyword>
+    <keyword id="KW-1185">Reference proteome</keyword>
+    <feature type="chain" description="Actin, cytoplasmic 2" id="PRO_0000367100">
+      <location>
+        <begin position="1"/>
+        <end position="375"/>
+      </location>
+    </feature>
+    <feature type="initiator methionine" description="Removed; alternate" evidence="7 8 9">
+      <location>
+        <position position="1"/>
+      </location>
+    </feature>
+    <feature type="chain" description="Actin, cytoplasmic 2, N-terminally processed" id="PRO_0000000831">
+      <location>
+        <begin position="2"/>
+        <end position="375"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="N-acetylmethionine; in Actin, cytoplasmic 2; alternate" status="by similarity">
+      <location>
+        <position position="1"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="N-acetylglutamate; in Actin, cytoplasmic 2, N-terminally processed; partial" evidence="8 9">
+      <location>
+        <position position="2"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Methionine sulfoxide" status="by similarity">
+      <location>
+        <position position="44"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Tele-methylhistidine" evidence="9">
+      <location>
+        <position position="73"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Phosphotyrosine" status="by similarity">
+      <location>
+        <position position="169"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Phosphotyrosine" evidence="10">
+      <location>
+        <position position="198"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Phosphotyrosine" evidence="10">
+      <location>
+        <position position="294"/>
+      </location>
+    </feature>
+    <feature type="modified residue" description="Phosphothreonine" evidence="11">
+      <location>
+        <position position="318"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20; dbSNP:rs28999111." id="VAR_032434" evidence="1">
+      <original>T</original>
+      <variation>I</variation>
+      <location>
+        <position position="89"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_032435" evidence="1">
+      <original>K</original>
+      <variation>M</variation>
+      <location>
+        <position position="118"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_067824" evidence="5">
+      <original>K</original>
+      <variation>N</variation>
+      <location>
+        <position position="118"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067814" evidence="6">
+      <original>T</original>
+      <variation>I</variation>
+      <location>
+        <position position="120"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_067825" evidence="4">
+      <original>I</original>
+      <variation>V</variation>
+      <location>
+        <position position="122"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067815" evidence="6">
+      <original>A</original>
+      <variation>V</variation>
+      <location>
+        <position position="135"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067816" evidence="6">
+      <original>S</original>
+      <variation>F</variation>
+      <location>
+        <position position="155"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In dbSNP:rs11549206." id="VAR_048186">
+      <original>T</original>
+      <variation>I</variation>
+      <location>
+        <position position="160"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067817" evidence="6">
+      <original>T</original>
+      <variation>K</variation>
+      <location>
+        <position position="203"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_067826" evidence="5">
+      <original>E</original>
+      <variation>K</variation>
+      <location>
+        <position position="241"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In dbSNP:rs11546899." id="VAR_055482">
+      <original>P</original>
+      <variation>L</variation>
+      <location>
+        <position position="243"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067818" evidence="6">
+      <original>R</original>
+      <variation>W</variation>
+      <location>
+        <position position="254"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In BRWS2." id="VAR_067819" evidence="6">
+      <original>R</original>
+      <variation>W</variation>
+      <location>
+        <position position="256"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_032436" evidence="1">
+      <original>P</original>
+      <variation>L</variation>
+      <location>
+        <position position="264"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20; dbSNP:rs28999112." id="VAR_032437" evidence="2">
+      <original>T</original>
+      <variation>I</variation>
+      <location>
+        <position position="278"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20." id="VAR_032438" evidence="1">
+      <original>P</original>
+      <variation>A</variation>
+      <location>
+        <position position="332"/>
+      </location>
+    </feature>
+    <feature type="sequence variant" description="In DFNA20; restricts cell growth at elevated temperature or under hyperosmolar stress as measured in growth assays with yeast expressing the mutation." id="VAR_032439" evidence="3">
+      <original>V</original>
+      <variation>A</variation>
+      <location>
+        <position position="370"/>
+      </location>
+    </feature>
+    <feature type="sequence conflict" description="In Ref. 10; AAA51580." ref="10">
+      <original>E</original>
+      <variation>K</variation>
+      <location>
+        <position position="316"/>
+      </location>
+    </feature>
+    <feature type="sequence conflict" description="In Ref. 10; AAA51580." ref="10">
+      <original>S</original>
+      <variation>F</variation>
+      <location>
+        <position position="344"/>
+      </location>
+    </feature>
+    <evidence key="1" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="13680526"/>
+      </source>
+    </evidence>
+    <evidence key="2" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="14684684"/>
+      </source>
+    </evidence>
+    <evidence key="3" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="16773128"/>
+      </source>
+    </evidence>
+    <evidence key="4" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="18804074"/>
+      </source>
+    </evidence>
+    <evidence key="5" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="19477959"/>
+      </source>
+    </evidence>
+    <evidence key="6" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="22366783"/>
+      </source>
+    </evidence>
+    <evidence key="7" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="12665801"/>
+      </source>
+    </evidence>
+    <evidence key="8" type="ECO:0000006">
+      <source ref="7"/>
+    </evidence>
+    <evidence key="9" type="ECO:0000006">
+      <source ref="8"/>
+    </evidence>
+    <evidence key="10" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="18083107"/>
+      </source>
+    </evidence>
+    <evidence key="11" type="ECO:0000006">
+      <source>
+        <dbReference type="PubMed" id="18088087"/>
+      </source>
+    </evidence>
+    <sequence length="375" mass="41793" checksum="54D08F986964EFD5" modified="1986-07-21" version="1">
+MEEEIAALVIDNGSGMCKAGFAGDDAPRAVFPSIVGRPRHQGVMVGMGQKDSYVGDEAQS
+KRGILTLKYPIEHGIVTNWDDMEKIWHHTFYNELRVAPEEHPVLLTEAPLNPKANREKMT
+QIMFETFNTPAMYVAIQAVLSLYASGRTTGIVMDSGDGVTHTVPIYEGYALPHAILRLDL
+AGRDLTDYLMKILTERGYSFTTTAEREIVRDIKEKLCYVALDFEQEMATAASSSSLEKSY
+ELPDGQVITIGNERFRCPEALFQPSFLGMESCGIHETTFNSIMKCDVDIRKDLYANTVLS
+GGTTMYPGIADRMQKEITALAPSTMKIKIIAPPERKYSVWIGGSILASLSTFQQMWISKQ
+EYDESGPSIVHRKCF
+</sequence>
+  </entry>
+  <copyright>
+Copyrighted by the UniProt Consortium, see http://www.uniprot.org/terms
+Distributed under the Creative Commons Attribution-NoDerivs License
+</copyright>
+</uniprot>

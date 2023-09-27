@@ -1,0 +1,432 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            import
+        </li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2>Data import</h2>
+            <p>This form allows you to import changes from a CSV file into the Digital Ageing Atlas.</p>
+            <ol>
+                <li>
+                    <p>Select your tab seperated text file and submit</p>
+                    <form id="import-uploadform" action="{% url 'admin:atlas_import_changes' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                        <input type="file" name="datafile" />
+                        <button type="submit" class="button blue-button">Submit</button>
+                    </form>
+                </li>
+                <li><p>All data to be imported is shown. Errors such as missing columns, extra columns and duplicates are highighted. Please check carefully then if correct, continue on. If there are errors, make the changes and resubmit.</p></li>
+                <li><p>Your data is then imported into the database</p></li>
+            </ol>
+            <h2>Formatting your data</h2>
+            <p>The data must be in the form of a tab seperated text file with a header matching one of the following list of columns</p> 
+            <p>Please ensure that the columns are named exactly as specified below. Any mistakes will mean that the column is not recongised and the data will not be imported. You will be able to see these issues on the next step.</p>
+            <p>Data is perfered to be in UTF-8 for correct support of mathmatical, scientific and international charecters though ASCII can be used (If ASCII is used on international characters they will be replaced by a ?).</p>
+            <h3>Accepted columns</h3>
+            <p>The columns that are highlighted are required for the import to work</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>Column</th>
+                    <th>Options</th>
+                    <th>Description</th>
+                    <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>name</strong></td>
+                        <td></td>
+                        <td>The name of the change</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>type</strong></td>
+                        <td>molecular, physiological, psychological or pathological</td>
+                        <td>The type of the change</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>starts_age</strong></td>
+                        <td></td>
+                        <td>The age at which the DATA for the change starts. Unless otherwise indicated this is to be used. The age MUST be supported by the change. Use -1 if the age is not known.</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ends_age</strong></td>
+                        <td></td>
+                        <td>The age at which the DATA for the change ends. Unless otherwise indicated this is to be used. The age MUST be supported by the change. Use -1 if the age is not known.</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>organism</strong></td>
+                        <td></td>
+                        <td>The lowercase common name for the organism (e.g. human, mouse)</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>tissues</strong></td>
+                        <td></td>
+                        <td>A comma seperated list of tissues that are already prt of the database. DO NOT use tissues not included in the database as they will be ignored.</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>pubmed</strong></td>
+                        <td></td>
+                        <td>A comma seperated list of pubmed ID's to be used as evidence. These will be used to create the LibAge entries.</td> 
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>gender</td>
+                        <td>male, female or male/female</td>
+                        <td>The gender (if known) of the change. The default is Male/Female</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>description</td>
+                        <td></td>
+                        <td>A description of the change. This is not required but is strongly suggested for psycological and physiological changes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <th colspan="4"><strong>Numerical Data:</strong> The following "required" options refer only to if numerical data is being included. Please read the options carefully to ensure the data are not reejected.</th>
+                    </tr>
+                    <tr>
+                        <td><strong>type</strong></td>
+                        <td>percentage, equation, series, incidence or morbidity</td>
+                        <td>The type of data that is being included. Please ensure the right type is indicated</td>
+                        <td>Yes (percentage and equation)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>process_measured</strong></td>
+                        <td></td>
+                        <td>What is being measured (e.g. Gene Expression). Please look up the available options and make sure the spelling is correct or the data will import incorrectly.</td>
+                        <td>Yes (percentage and equation)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>percentage_change</strong></td>
+                        <td></td>
+                        <td>The percentage amount that has changed. This allows multiple decimal places and if negative should be prefixed with a negative symbol</td>
+                        <td>Yes (percentage and equation)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>plot</strong></td>
+                        <td>none, linear, exponential, line, bar, column, point, pie</td>
+                        <td>How the data is to be plotted. Some options are not yet operational.</td>
+                        <td>Yes (equation)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>coefficiant</strong></td>
+                        <td></td>
+                        <td>The coefficiant value for the equation. Supports multiple decimal places. Negative values should be prefixed with a negative symbol.</td>
+                        <td>Yes (equation)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>intercept</strong></td>
+                        <td></td>
+                        <td>The intercept value for the equaton. Supports multiple decimal places. Negative values should be prefixed with a negative symbol.</td>
+                        <td>Yes (equation)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>An example</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>type</th>
+                        <th>starts_age</th>
+                        <th>ends_age</th>
+                        <th>gender</th>
+                        <th>organism</th>
+                        <th>tissues</th>
+                        <th>pubmed</th>
+                        <th>percentage_change</th>
+                        <th>p_value</th>
+                        <th>entrez_id</th>
+                        <th>process_measured</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>phosphatidylinositol transfer protein, alpha increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>75</td>
+                        <td>0.000049</td>
+                        <td>5306</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>mitochondrial ribosomal protein L43 increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>151</td>
+                        <td>0.0001</td>
+                        <td>84545</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>PHD finger protein 3 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>226</td>
+                        <td>0.000264</td>
+                        <td>23469</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>solute carrier organic anion transporter family, member 3A1 increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>92</td>
+                        <td>0.000488</td>
+                        <td>28232</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>zinc finger protein 238 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>64</td>
+                        <td>0.000846</td>
+                        <td>10472</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>LSM5 homolog, U6 small nuclear RNA associated (S. cerevisiae) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>197</td>
+                        <td>0.00101</td>
+                        <td>23658</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>ubiquitin-conjugating enzyme E2D 2 (UBC4/5 homolog, yeast) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>93</td>
+                        <td>0.00109</td>
+                        <td>7322</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>asparagine-linked glycosylation 13 homolog (S. cerevisiae) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>73</td>
+                        <td>0.00112</td>
+                        <td>79868</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>zinc finger protein 770 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>95</td>
+                        <td>0.00114</td>
+                        <td>54989</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>saccharopine dehydrogenase (putative) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>87</td>
+                        <td>0.00116</td>
+                        <td>51097</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>elongation protein 3 homolog (S. cerevisiae) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>118</td>
+                        <td>0.00121</td>
+                        <td>55140</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>AT rich interactive domain 1A (SWI-like) increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>51</td>
+                        <td>0.00123</td>
+                        <td>8289</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>spectrin, beta, non-erythrocytic 1 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>94</td>
+                        <td>0.00123</td>
+                        <td>6711</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>vacuolar protein sorting 13 homolog C (S. cerevisiae) decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>142</td>
+                        <td>0.00137</td>
+                        <td>54832</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>v-rel reticuloendotheliosis viral oncogene homolog A (avian) increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>60</td>
+                        <td>0.00142</td>
+                        <td>5970</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>chromosome 4 open reading frame 34 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>56</td>
+                        <td>0.00158</td>
+                        <td>201895</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>zinc finger protein 25 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>106</td>
+                        <td>0.0016</td>
+                        <td>219749</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>echinoderm microtubule associated protein like 1 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>719</td>
+                        <td>0.00215</td>
+                        <td>2009</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>KIAA1737 decreases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>101</td>
+                        <td>0.00215</td>
+                        <td>85457</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>centrosomal protein 57kDa increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>86</td>
+                        <td>0.00222</td>
+                        <td>9702</td>
+                        <td>Gene Expression Level</td></tr>
+                    <tr><td>empty spiracles homeobox 1 increases with age</td>
+                        <td>molecular</td>
+                        <td>-1</td>
+                        <td>-1</td>
+                        <td>Female</td>
+                        <td>human</td>
+                        <td>blood</td>
+                        <td>20147335</td>
+                        <td>80</td>
+                        <td>0.00231</td>
+                        <td>2016</td>
+                        <td>Gene Expression Level</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

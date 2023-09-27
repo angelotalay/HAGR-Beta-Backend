@@ -1,0 +1,2 @@
+?{% for var,value in request.GET.lists %}{% if var in keys %}{% if value|length > 1 %}{% for sv in value %}&amp;{{ var }}={{ sv }}{% endfor %}{% else %}&amp;{{ var }}={{ value|first }}{% endif %}{% endif %}{% endfor %}
+

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	
+	<h1>About the Digital Ageing Atlas</h1>
+
+	<div class="yui3-u-1-2">
+		<div class="page-section">
+			<h2>What is the project about?</h2>
+
+			<p>The human ageing process is characterised by changes at different biological levels, including multiple forms of cellular and molecular damage. Our group has developed a web portal that will integrate molecular, cellular and physiological age-related data. This web portal serves as the first centralised collection of ageing changes. It will be very useful for researchers to relate age-related changes at different levels and develop new models of ageing to obtain new insights. Crucially, by having an integrated view of different age-related changes, we will be better able to understand the interplay of such changes and how they can be tackled in order to delay ageing.</p>
+
+			<h2>Citations</h2>
+
+			<p>If you would like to cite this resource in your papers please use the following:</p>
+
+            <blockquote>Thomas Craig; Chris Smelick; Robi Tacutu; Daniel Wuttke; Shona H. Wood; Henry Stanley; Georges Janssens; Ekaterina Savitskaya; Alexey Moskalev; Robert Arking; Joao Pedro de Magalhaes "The Digital Ageing Atlas: integrating the diversity of age-related changes into a unified resource" Nucleic Acids Research 2014 doi: 10.1093/nar/gku843 (In Press)</blockquote>
+
+            <p>We also have a manuscript submitted that describes the Digital Ageing Atlas. When accepted this will become the preferred way of citing this resource</p>
+
+			<h2>Credits and Contributors</h2>
+
+			<p>We thank the following for their contributions to the project, either technically or academically.</p>
+
+			<ul>
+				<li>João Pedro de Magalhães - Project leader</li>
+				<li>Thomas Craig - Developer</li>
+				<li>Chris Smelick - Compilation of physiological data for the database</li>
+				<li>The Ageing Group at Liverpool University - Testing and constructive criticism</li>
+			</ul>
+
+			<h2>Become a contributor</h2>
+
+			<p>If you would like to contribute to the database yourself, for instance if you have new data on ageing, please use the contribute page to submit your data.</p>
+
+            <h2>Copyright and licencing</h2>
+
+            <p class="text-centre"><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0 Unported License</a>.</p>
+
+		</div>
+	</div>
+
+	<div class="yui3-u-1-2 yui-tweak">
+		<div class="page-section left-collapse">
+			<h2>Sources of data</h2>
+
+			<p>To compile the background information for the database the following sources where used:</p>
+
+			<h3>Anatomical data</h3>
+
+			<p>The anatomical (tissue) data was sourced from eVOContology.org (<a href="http://www.ncbi.nlm.nih.gov/pubmed/17961239">Adele Kruger, Oliver Hofmann, Piero Carninci, Yoshihide Hayashizaki and Winston Hide. Simplified ontologies allowing comparison of developmental mammalian gene expression. Genome Biology 2007, 8:R229.</a>), although this has been edited to suit the purposes of the database.</p>
+
+			<h3>Gene details</h3>
+
+			<p>A combination of sources where used to fetch this information. The Entrez Gene database was used to gather basic gene information, Gene Ontology terms and external links. HomoloGene was used for the gene orthologues. The NCBI Taxonomy database was used to gather the correct taxonomy information.</p>
+
+			<h3>Bibliographic data</h3>
+
+			<p>Bibliographic data was constructed by fetching a basic data from the NCBI PubMed database where available.</p>
+			
+			<h2>Technical Details</h2>
+
+			<p>This site is built in Python, using the Django framework. It uses a PostgreSQL database for storage.</p>
+
+			<h2>Image Credits</h2>
+
+			<ul>
+                <li><a href="http://www.flickr.com/photos/liberato/200858281/">Riga Old Man</a></li>
+                <li><a href="http://www.flickr.com/photos/dark_ghetto28/407953159/">sweet old kiss</a></li>
+                <li><a href="http://www.flickr.com/photos/dimsumdarren/861082870/">DNA redwoods</a></li>
+                <li><a href="http://www.flickr.com/photos/jurvetson/57080968/">Riding Shotgun</a></li>
+                <li><a href="http://www.flickr.com/photos/vivatier/4462185144/">Concept photo of a pet rodent in a wine glass</a></li>
+                <li><a href="http://www.flickr.com/photos/beger/2348083198/">Albino Mouse</a></li>
+                <li><a href="http://www.flickr.com/photos/e3000/99284256/">ssttt! little baby-mouse, sleeping on my hand</a></li>
+                <li><a href="http://www.flickr.com/photos/hthg1983/2237614948/">Happy Lunar New Year of The Mouse</a></li>
+			</ul>
+
+		</div>
+	</div>
+		
+{% endblock %}

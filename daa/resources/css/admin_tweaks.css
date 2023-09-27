@@ -1,0 +1,54 @@
+.admin-index-page > .row-fluid {
+    margin-left: 0;
+}
+
+.admin-index-page .table-overview caption {
+    position: relative;
+    margin-bottom: 1em;
+}
+
+.admin-index-page .table-overview caption:before {
+    content: "";
+    width: 0;
+    height: 0;
+    display: inline-block;
+    border: 0.5em solid black;
+    border-radius: 1em;
+}
+
+.genage .table-overview caption:before {
+    border-color: #BA4200;
+}
+
+.daa .table-overview caption:before {
+    border-color: rgba(65, 135, 192, 0.8);
+}
+
+.anage .table-overview caption:before {
+    border-color: #008000; 
+}
+
+.gendr .table-overview caption:before {
+    border-color: #B03060; 
+}
+
+.longevity .table-overview caption:before {
+    border-color: #DEB887; 
+}
+
+.libage .table-overview caption:before {
+    border-color: #E6AA19; 
+}
+
+textarea {
+    width: 44em !important;
+}
+
+#lookup-details-spinner {
+    display: inline-block;
+    text-indent: -99999em;
+    width: 24px;
+    height: 24px;
+    background: url(/static/images/loading.gif) no-repeat center;
+    margin-left: 0.5em;
+}

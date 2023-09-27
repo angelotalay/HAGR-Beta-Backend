@@ -1,0 +1,119 @@
+{% extends "admin/change_list.html" %}
+{% load admin_list i18n %}
+{% load admin_urls %}
+{% load mptt_tags %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="/static/css/jquery.treeview.css" />
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="/static/js/libs/jquery-1.6.4.min.js"></script>
+<script src="/static/js/libs/jquery.treeview.js"></script>
+<script src="/static/js/ui.js"></script>
+{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+  <!--
+    <div class="breadcrumbs">
+      <a href="../../../">
+        {% trans "Home" %}
+      </a>
+       &rsaquo;
+       <a href="../../">
+         {{ app_label|capfirst }}
+      </a>
+      &rsaquo;
+      <a href="../">
+	  	{{ cl.opts.verbose_name_plural|capfirst }}
+	  </a>
+	  &rsaquo;
+	  Editor
+    </div>
+    -->
+    <ul class="breadcrumb">
+        <li><a href="../../../">{% trans "Home" %}</a><span class="divider">»</span></li>
+        <li><a href="../../">{{ app_label|capfirst }}</a><span class="divider">»</span></li>
+        <li><a href="../">{{ cl.opts.verbose_name_plural|capfirst }}</a><span class="divider">»</span></li>
+        <li>Editor</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block content %}
+<div class="outer-content">
+    <div class="relationship-toolbar well">
+        <a href="{% url 'admin:atlas_relationship_add' %}" class="btn button">Add Relationship</a>
+    </div>
+    <div class="relationship-editor-tree module well span5">
+        <div>
+            <h2>{{ relationship.change|default:"No relationship selected" }}</h2>
+        </div>
+        <ul class="root rel-tree treeview-blue">
+            {% recursetree nodes %}
+                <li>
+                    <a href="{% url 'admin:atlas_relationship_change' node.id %}">{{ node.change.name }}</a>
+                    &nbsp;
+                    <a href="{% url 'admin:atlas_relationship_add' %}?parent={{node.id}}" class="add btn-small btn-success"><i class="icon-plus"></i> Add child</a>
+                    <a href="{% url 'admin:atlas_relationship_delete' node.id %}" class="delete btn-small btn-danger"><i class="icon-minus"></i> Delete</a>
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endrecursetree %}
+        </ul>
+    </div>
+      <div id="content-main" class="span5">
+        {% block object-tools %}
+          {% if has_add_permission %}
+            <ul class="object-tools">
+              {% block object-tools-items %}
+                <li>
+                  <a href="{% url cl.opts|admin_urlname:'add' %}{% if is_popup %}?_popup=1{% endif %}" class="addlink">
+                    {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                  </a>
+                </li>
+              {% endblock %}
+            </ul>
+          {% endif %}
+        {% endblock %}
+        {% if cl.formset.errors %}
+            <p class="errornote">
+            {% blocktrans count cl.formset.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+            </p>
+            {{ cl.formset.non_form_errors }}
+        {% endif %}
+        <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
+          {% block search %}{% search_form cl %}{% endblock %}
+          {% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
+
+          {% block filters %}
+            {% if cl.has_filters %}
+              <div id="changelist-filter">
+                <h2>{% trans 'Filter' %}</h2>
+                {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+              </div>
+            {% endif %}
+          {% endblock %}
+
+          <form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>{% csrf_token %}
+          {% if cl.formset %}
+            <div>{{ cl.formset.management_form }}</div>
+          {% endif %}
+
+          {% block result_list %}
+              {% if action_form and actions_on_top and cl.full_result_count %}{% admin_actions %}{% endif %}
+              {% result_list cl %}
+              {% if action_form and actions_on_bottom and cl.full_result_count %}{% admin_actions %}{% endif %}
+          {% endblock %}
+          {% block pagination %}{% pagination cl %}{% endblock %}
+          </form>
+        </div>
+      </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "admin/change_list.html" %}
+{% load admin_list i18n %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+	  	        {{ cl.opts.verbose_name_plural|capfirst }}
+	        </a>
+            <span class="divider">»</span>
+        </li>
+	    <li>Checks</li>
+    </ul>
+  {% endblock %}
+{% endif %}

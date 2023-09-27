@@ -1,0 +1,58 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+	<div class="yui3-u-1-2">
+		<div class="introduction">
+            <h1>Welcome to the Digital Ageing Atlas, the portal of ageing-related changes</h1>
+
+            <p>The Digital Ageing Atlas (DAA) is a portal of age-related changes covering different biological levels. It integrates molecular, physiological, psychological and pathological age-related data to create an interactive portal that serves as the first centralised collection of human ageing changes and pathologies.</p>
+
+            <p>To facilitate integrative, system-level studies of ageing, the DAA provides a centralised source for ageing-related data as well as basic tools to query and visualize the data, including anatomical models. Data in the DAA is manually curated from the literature and retrieved from public databases. For more detailed analyses users are able to download the entire database. More information on how to use the DAA is available on our <a href="{% url 'atlas.views.help' %}">help page</a>.</p>
+
+            <p>The DAA primarily focuses on human ageing, but also includes supplementary mouse data, in particular gene expression data, to enhance and expand the information on human ageing.</p>
+
+		</div>
+	</div>
+
+	<div class="yui3-u-1-2 yui-tweak">
+		<form method="get" action="{% url 'atlas.views.results' %}" class="introduction homepage-search left-collapse">
+			<h2>Searching the Digital Ageing Atlas</h2>
+			<label class="search-label">Search the database: <input type="search" name="s" placeholder="e.g. IGF1, heart, wrinkles, insulin-like growth factor 1, ENSG00000017427" /></label>
+			<br>
+			{{ species_options }}
+			<br>
+			<button class="button blue-button" type="submit">Search</button>
+			<h2>You can also search by:</h2>
+			<ul class="methods-of-search">
+				<li><a class="anatomical" href="{% url 'atlas.views.anatomical' %}"><span>&nbsp;</span>Anatomical Feature</a></li>
+			</ul>
+		</form>
+	</div>
+
+	<div class="yui3-u-1">
+		<div class="introduction">
+			<h2>Database Statistics</h2>
+			{% for values in stats %}
+				<ul class="methods-of-search database-stats {% if values.0.name == 'Human' %}large-values{% endif %}">
+					<li class="stats-title">{{ values.0.name }}{% if values.0.name == 'Mouse' %} (Supplementary gene expression){% endif %}</li>
+					<li><a class="molecular-bg" href="{% url 'atlas.views.results' %}?species[]={{ values.0.id }}&amp;t=molecular">Molecular changes <span>{{ values.1.changes.molecular.count|default:"0" }}</span></a></li>
+                    {% if values.0.name == 'Human' %}
+					<li><a class="pathological-bg" href="{% url 'atlas.views.results' %}?species[]={{ values.0.id }}&amp;t=pathological">Pathological changes <span>{{ values.1.changes.pathological.count|default:"0" }}</span></a></li>
+					<li><a class="physiological-bg" href="{% url 'atlas.views.results' %}?species[]={{ values.0.id }}&amp;t=physiological">Physiological changes <span>{{ values.1.changes.physiological.count|default:"0" }}</span></a></li>
+					<li><a class="psychological-bg" href="{% url 'atlas.views.results' %}?species[]={{ values.0.id }}&amp;t=psychological">Psychological changes <span>{{ values.1.changes.psychological.count|default:"0" }}</span></a></li>
+                    {% endif %}
+					<li><a class="gene-bg" href="{% url 'atlas.views.results' %}?species[]={{ values.0.id }}&amp;t=gene">Genes <span>{{ values.1.sections.gene.count }}</span></a></li>
+				</ul>
+			{% endfor %}
+			{% with values=stats.0 %}
+				<ul class="methods-of-search database-stats large-values">
+					<li class="stats-title">General</li>
+					<li><a class="tissue-bg" href="{% url 'atlas.views.results' %}?t=tissue">Tissues <span>{{ values.1.sections.tissue.count }}</span></a></li>
+					<li><a class="reference-bg" href="{% url 'atlas.views.results' %}?t=reference">References <span>{{ values.1.sections.reference.count }}</span></a></li>
+				</ul>
+			{% endwith %}
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+
+{% block overridestyles %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery-ui-1.8.16.custom.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.multiselect.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.multiselect.filter.css">
+{% endblock %}
+
+{% block content %}
+	<h1 class="{% if not limited %}{{ type }}-type{% endif %}">{{ title }}</h2>
+	<div class="results-table-container">
+		{% render_table table 'atlas/table.html' %}
+	</div>
+{% endblock %}
+{% block sidebar %}
+	<div class="sidebar-module">
+		<h2>Filters</h2>
+        {% if not type %}
+        <strong>Common Filters:</strong>
+        <br>
+        <a href="#" class="add-specific-filter internal-link molecular-type" data-filter-for="type" data-filter-value="molecular">Molecular</a>, <a href="#" class="add-specific-filter internal-link physiological-type" data-filter-for="type" data-filter-value="physiological">Physiological</a>, <a href="#" class="add-specific-filter internal-link pathological-type" data-filter-for="type" data-filter-value="pathological">Pathological</a>, <a href="#" class="add-specific-filter internal-link psychological-type" data-filter-for="type" data-filter-value="psychological">Psychological</a>
+        {% endif %}
+		<form action="" method="get" class="filter-form">
+			{% include 'get_fields.html' %}
+			<ul>
+			</ul>
+			<input type="hidden" name="page" value="1" />
+			<a href="#" class="button add-filter">+ Add another filter</a>
+			<button class="button blue-button" type="submit">Filter</button>
+			<a class="button" href="{% include 'get_querystring.html' %}">Clear</a>
+		</form>
+	</div>
+    {% if type != 'gene' and type != 'tissue' %}
+    <div class="sidebar-module">
+        <h2>Export results</h2>
+        <p>Export the results of your search to a tab separated text file for further analysis</p>
+        <form action="" method="get">
+            {% for var, value in request.GET.lists %}
+                {% for v in value %}
+                    <input type="hidden" name="{{ var }}" value="{{v}}" />
+                {% endfor %}
+            {% endfor %}
+            <input type="hidden" value="True" name="export" />
+            <button type="submit" class="button blue-button">Export results</button>
+        </form>
+    </div>
+    {% endif %}
+{% endblock %}
+{% block extralibs %}
+	<script src="{{ STATIC_URL }}js/libs/jquery-ui-1.8.16.custom.min.js"></script>
+	<script src="{{ STATIC_URL }}js/libs/jquery.multiselect.min.js"></script>
+	<script src="{{ STATIC_URL }}js/libs/jquery.multiselect.filter.js"></script>
+	<script src="{{ STATIC_URL }}js/libs/jquery.querybuilder.js"></script>
+{% endblock %}
+{% block postjs %}
+	<script>
+		var FIELDS = {
+			{% for fldname, fld in fields.items %}
+			'{{ fldname|safe }}': {
+				'type': '{{ fld.type|safe }}' , 
+				'widget': '{{ fld.html|safe }}', 
+				'lookup': '{{ fld.lookup_type }}',
+				'active': '{{ fld.active|default:"False"|safe }}',
+			},
+			{% endfor %}
+		};
+		$(document).ready(function(){
+			$('.filter-form ul').queryBuilder({'fields': FIELDS, 'template': '<li class="filter-item">{3}<select class="field_list">{0}</select> is <select class="operations_list">{1}</select> {2} </li>', 'remove_template': '<a href="#" class="remove-filter">Remove</a>', 'prefix_strip': ['percentage']});	
+		});
+	</script>
+{% endblock %}

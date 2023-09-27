@@ -1,0 +1,248 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>import</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module">
+            {% if invalid_fields|length > 0 %}
+            <h2>Invalid columns</h2>
+            <p>The following columns will not be used during the import as they do not match a column in the database. Please check spelling and for incorrect spaces. All columns names are lower case.</p>
+            <ul>
+            {% for c in invalid_fields %}
+                <li>{{ c }}</li>
+            {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if op.ignore|length > 0 %}
+           <h2>Entries that will not be imported ({{ op.ignore|length }})</h2>
+           <p>The following entries will not be imported as they have error(s). Please check these and ensure that any errors are not going to cause issues with your import</p>
+            <table class="table table-bordered">
+                <thead>
+                    </tr>
+                        <th>entrez_id</th>
+                        <th>name</th>
+                        <th>symbol</th>
+                        <th>organism</th>
+                        <th>alias</th>
+                        <th>avg_lifespan_change_desc</th>
+                        <th>max_lifespan_change_desc</th>
+                        <th>avg_lifespan_change</th>
+                        <th>lifespan_effect</th>
+                        <th>longevity_influence</th>
+                        <th>max_lifespan_change</th>
+                        <th>phenotype_description</th>
+                        <th>hidden</th>
+                        <th>pubmed</th>
+                        <th>method</th>
+                        <th>notes</th>
+                    </tr>
+               </thead>
+               <tbody>
+               {% for eg in op.ignore %}
+               <tr>
+                   <td>{{ eg.entrez_id|default:"<strong class='error'>Required!</strong>" }}</td>
+                   <td>{{ eg.name }}</td>
+                   <td>{{ eg.symbol }}</td>
+                   <td>{{ eg.organism|default:"<strong class='error'>Required!</strong>" }}</td>
+                   <td>{{ eg.alias }}</td>
+                   <td>{{ eg.avg_lifespan_change_desc }}</td>
+                   <td>{{ eg.max_lifespan_change_desc }}</td>
+                   <td>{{ eg.avg_lifespan_change }}</td>
+                   <td>{{ eg.lifespan_effect }}</td>
+                   <td>{{ eg.longevity_influence }}</td>
+                   <td>{{ eg.max_lifespan_change }}</td>
+                   <td>{{ eg.phenotype_description }}</td>
+                   <td>{{ eg.hidden }}</td>
+                   <td>{{ eg.pubmed|default:"<strong class='error'>Required!</strong>" }}</td>
+                   <td>{{ eg.method }}</td>
+                   <td>{{ eg.notes }}</td>
+               </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+           {% endif %}
+
+
+            {% if op.duplicate|length > 0 %}
+           <h2>Duplicate longevity entry ({{ op.duplicate|length }})</h2>
+           <p>There is an existing longevity entry on the gene that has the same reference as the entry to import. <strong>Please ensure this is not a duplicate before submission; If it is, please remove and resubmit (Duplicate longevity entries are allowed for multiple observations that have the same bibliographical reference but different values)</strong></p>
+            <table class="table table-bordered">
+                <thead>
+                    </tr>
+                        <th>entrez_id</th>
+                        <th>name</th>
+                        <th>symbol</th>
+                        <th>organism</th>
+                        <th>alias</th>
+                        <th>avg_lifespan_change_desc</th>
+                        <th>max_lifespan_change_desc</th>
+                        <th>avg_lifespan_change</th>
+                        <th>lifespan_effect</th>
+                        <th>longevity_influence</th>
+                        <th>max_lifespan_change</th>
+                        <th>phenotype_description</th>
+                        <th>hidden</th>
+                        <th>pubmed</th>
+                        <th>method</th>
+                        <th>notes</th>
+                        <th></th>
+                    </tr>
+               </thead>
+               <tbody>
+               {% for eg in op.duplicate %}
+               <tr>
+                   <td>{{ eg.0.entrez_id }}</td>
+                   <td>{{ eg.0.name }}</td>
+                   <td>{{ eg.0.symbol }}{% if eg.2 != '' %} <br><strong>(In DB as {{ eg.2 }})</strong>{% endif %}</td>
+                   <td>{{ eg.0.organism }}</td>
+                   <td>{{ eg.0.alias }}</td>
+                   <td>{{ eg.0.avg_lifespan_change_desc }}</td>
+                   <td>{{ eg.0.max_lifespan_change_desc }}</td>
+                   <td>{{ eg.0.avg_lifespan_change }}</td>
+                   <td>{{ eg.0.lifespan_effect }}</td>
+                   <td>{{ eg.0.longevity_influence }}</td>
+                   <td>{{ eg.0.max_lifespan_change }}</td>
+                   <td>{{ eg.0.phenotype_description }}</td>
+                   <td>{{ eg.0.hidden }}</td>
+                   <td>{{ eg.0.pubmed }}</td>
+                   <td>{{ eg.0.method }}</td>
+                   <td>{{ eg.0.notes }}</td>
+                   <td><a href="{% url 'admin:genage_model_model_change' eg.1 %}">View existing</a></td>
+               </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+           {% endif %}
+
+            {% if op.append|length > 0 %}
+           <h2>Existing genes ({{ op.append|length }})</h2>
+           <p>The following genes already exist in the database. Your longevity entry will be added to this gene, but no details on the gene will be changed.</p>
+            <table class="table table-bordered">
+                <thead>
+                    </tr>
+                        <th>entrez_id</th>
+                        <th>name</th>
+                        <th>symbol</th>
+                        <th>organism</th>
+                        <th>alias</th>
+                        <th>avg_lifespan_change_desc</th>
+                        <th>max_lifespan_change_desc</th>
+                        <th>avg_lifespan_change</th>
+                        <th>lifespan_effect</th>
+                        <th>longevity_influence</th>
+                        <th>max_lifespan_change</th>
+                        <th>phenotype_description</th>
+                        <th>hidden</th>
+                        <th>pubmed</th>
+                        <th>method</th>
+                        <th>notes</th>
+                    </tr>
+               </thead>
+               <tbody>
+               {% for eg in op.append %}
+               <tr>
+                   <td>{{ eg.0.entrez_id }}</td>
+                   <td>{{ eg.0.name }}</td>
+                   <td>{{ eg.0.symbol }}{% if eg.2 != '' %} <br><strong>(In DB as {{ eg.2 }})</strong>{% endif %}</td>
+                   <td>{{ eg.0.organism }}</td>
+                   <td>{{ eg.0.alias }}</td>
+                   <td>{{ eg.0.avg_lifespan_change_desc }}</td>
+                   <td>{{ eg.0.max_lifespan_change_desc }}</td>
+                   <td>{{ eg.0.avg_lifespan_change }}</td>
+                   <td>{{ eg.0.lifespan_effect }}</td>
+                   <td>{{ eg.0.longevity_influence }}</td>
+                   <td>{{ eg.0.max_lifespan_change }}</td>
+                   <td>{{ eg.0.phenotype_description }}</td>
+                   <td>{{ eg.0.hidden }}</td>
+                   <td>{{ eg.0.pubmed }}</td>
+                   <td>{{ eg.0.method }}</td>
+                   <td>{{ eg.0.notes }}</td>
+               </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+           {% endif %}
+
+           <h2>New records to be created ({{ op.new|length }})</h2>
+            <table class="table table-bordered">
+                <thead>
+                    </tr>
+                        <th>entrez_id</th>
+                        <th>name</th>
+                        <th>symbol</th>
+                        <th>organism</th>
+                        <th>alias</th>
+                        <th>avg_lifespan_change_desc</th>
+                        <th>max_lifespan_change_desc</th>
+                        <th>avg_lifespan_change</th>
+                        <th>lifespan_effect</th>
+                        <th>longevity_influence</th>
+                        <th>max_lifespan_change</th>
+                        <th>phenotype_description</th>
+                        <th>hidden</th>
+                        <th>pubmed</th>
+                        <th>method</th>
+                        <th>notes</th>
+                    </tr>
+               </thead>
+               <tbody>
+               {% for eg in op.new %}
+               <tr>
+                   <td>{{ eg.entrez_id }}</td>
+                   <td>{{ eg.name }}</td>
+                   <td>{{ eg.symbol }}</td>
+                   <td>{{ eg.organism }}</td>
+                   <td>{{ eg.alias }}</td>
+                   <td>{{ eg.avg_lifespan_change_desc }}</td>
+                   <td>{{ eg.max_lifespan_change_desc }}</td>
+                   <td>{{ eg.avg_lifespan_change }}</td>
+                   <td>{{ eg.lifespan_effect }}</td>
+                   <td>{{ eg.longevity_influence }}</td>
+                   <td>{{ eg.max_lifespan_change }}</td>
+                   <td>{{ eg.phenotype_description }}</td>
+                   <td>{{ eg.hidden }}</td>
+                   <td>{{ eg.pubmed }}</td>
+                   <td>{{ eg.method }}</td>
+                   <td>{{ eg.notes }}</td>
+               </tr>
+               {% endfor %}
+               </tbody>
+           </table>
+        </div>
+        <div class="module well" style="overflow: auto; padding: 1em;">
+            <form style="width: 49%; float: left;" id="import-uploadform" action="{% url 'admin:genage_csvimport' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                <input type="file" name="datafile" />
+                <button type="submit" class="btn button">Re-submit</button>
+            </form>
+            <form style="width: 49%; float: left;" id="import-continueform" action="{% url 'admin:genage_csvimportcomplete' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                <input type="hidden" value="{{ data }}" name="data" />
+                <button type="submit" class="btn btn-info button blue-button" style="float:right">Import</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

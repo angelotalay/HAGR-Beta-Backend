@@ -1,0 +1,248 @@
+{% extends 'base.html' %}
+{% load markup %}
+{% load mptt_tags %}
+{% load references %}
+{% load markdown_deux_tags %}
+
+{% block overridestyles %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.treeview.css">
+{% endblock %}
+
+{% block content %}
+    {% if change.hide %}
+    <div class="hidden-change">
+        This change has been marked as hidden. It will not be displayed in the live version and may suffer from inaccuracies or lack of detail.
+    </div>
+    {% endif %}
+	<div class="yui3-u-1 details-header {{ change.type }}-bg">
+		<h1>{{ title }}</h1>
+		<span class="subheading">{{ change.type|capfirst }}</span>
+	</div>
+
+	<div class="yui3-u-1-3 details-column small-column">
+		<div>
+			{% if change.process_measured %}
+			<h2>Process Measured</h2>
+			<div>{{ change.process_measured }}</div>
+			{% endif %}
+			{% if change.gender != 'male/female' %}
+			<h2>Gender</h2>
+			<div>{{ change.gender|title }}</div>
+			{% endif %}
+			<h2>Data Availability</h2>
+			<div>
+				{% if change.starts_age < 0 and change.ends_age < 0 %}
+				Period at which this change occurs is not accurately known
+                {% else %}
+                    <span class="lowest-age">
+                    {% if change.starts_age < 0 %}
+                    Uknown start 
+                    {% else %}
+                    {{ change.starts_age }}
+                    {% endif %}
+                    </span>
+                    to 
+                    <span class="highest-age">
+                    {% if change.ends_age < 0 %}
+                    unknown 
+                    {% else %}
+                    {{ change.ends_age }}
+                    {% endif %}
+                    </span>
+                    {{ change.time_measure }}
+				{% endif %}
+			</div>
+			<h2>Tissue{{ change.tissues.count|pluralize }}</h2>
+			<ul class="tissue-list">
+			{% for tissue in change.tissues.all %}
+				<li>
+					<a class="tissue tissue-link" href="{% url 'atlas.views.tissue' tissue.evid %}">{{ tissue.name }}</a>
+					<a href="{% url 'atlas.views.results' %}?l=tissue&amp;lid={{ tissue.evid }}" class="view-more-link">Changes</a>
+					<a href="" class="button fright small show-tree">&#8681;</a>
+					<ul class="root tissue-tree treeview-blue">
+						{% recursetree nodes %}
+							<li>
+								<span {% if node.name == tissue.name %}class="current"{% endif %}>{{ node.name }}</span>
+								{% if not node.is_leaf_node %}
+									<ul class="children">
+										{{ children }}
+									</ul>
+								{% endif %}
+							</li>
+						{% endrecursetree %}
+					</ul>
+				</li>
+			{% endfor %}
+			</ul>
+			<h2>References</h2>
+            {% references change.identifier %}
+            {% if change.type == 'physiological' %}
+            <h2>External Links</h2>
+            <ul>
+                <li><a href="https://www.google.com/search?site=imghp&amp;tbm=isch&amp;q={{ change.name|urlencode }}">Google image search</a></li>
+            </ul>
+            {% endif %}
+		</div>
+	</div>
+
+	<div class="yui3-u-2-3 yui-tweak details-column large-column">
+		<div class="no-left-margin">
+            {% if show_add_to_saved %}
+					{% if change.identifier in request.session.saved %}
+						<form method="post" action="{% url 'atlas.views.saved' "remove" %}">
+							{% csrf_token %}
+							<input type="hidden" name="url" value="{{ request.get_full_path }}" />
+							<input type="hidden" name="id" value="{{ change.identifier }}" />
+							<button type="submit" class="button red-button fright button-heading">Remove from saved list</button>
+						</form>
+					{% else %}
+						<form method="post" action="{% url 'atlas.views.saved' "add" %}">
+							{% csrf_token %}
+							<input type="hidden" name="url" value="{{ request.get_full_path }}" />
+							<input type="hidden" name="id" value="{{ change.identifier }}" />
+							<button type="submit" class="button blue-button fright button-heading">Add to saved list</button>
+						</form>
+					{% endif %}
+				{% endif %}
+			{% if change.data.percentage or change.data.equation %}
+
+				<h2>Change</h2>
+				<div>
+                    {% with change.data.percentage_change|cut:"-" as value %}
+					{% if change.data.percentage.is_negative or change.data.equation.is_negative %}
+						<span class="negative">{% if value != '0' and value != '0.0' and value != '' and value != 'None' %}{{ change.data.percentage_change|floatformat:1|cut:"-" }}% {% endif %}Decrease</span>
+					{% else %}
+						<span class="positive">{% if value != '0' and value != '0.0' and value != '' and value != 'None' %}{{ change.data.percentage_change|floatformat:1|cut:"-" }}% {% endif %}Increase</span>
+					{% endif %}
+                    {% endwith %}
+					in <span class="highlight-value">{{ change.process_measured }}</span> {% if change.data.get_pvalue %}with a P Value of <span class="highlight-value">{{ change.data.get_pvalue|stringformat:".2e" }}</span>{% endif %}
+					{% if change.data.equation  %}
+						<h3>Equation Details</h3>
+						<table>
+							<thead>
+								<tr>
+									<th>Equation Type</th>
+									<th>Coefficient</th>
+									<th>Intercept</th>
+									<th>Data Transforms</th>
+									<th>Method of Collection</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{ change.data.equation.plot }}</td>
+									<td>{{ change.data.equation.coefficiant|stringformat:".2e" }}</td>
+									<td>{{ change.data.equation.intercept|stringformat:".2e" }}</td>
+									<td>{{ change.data.equation.data_transforms|default:"Unknown" }}</td>
+									<td>{{ change.data.equation.method_collection|default:"Unknown" }}</td>
+								</tr>
+							</tbody>
+						</table>
+					{% endif %}
+				</div>
+			{% endif %}
+			{% if change.data.dataset.datapoint_set %}
+				<h2>Data</h2>
+				<div id="chart"></div>
+				{% with change.data.dataset as data %}
+				<div class="data-table-container">
+					<table>
+						<thead>
+							<tr>
+							{% for point in data.datapoint_set.all %}
+								<th>{{ point.label }}</th>
+							{% endfor %}
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							{% for point in data.datapoint_set.all %}
+								<td>{{ point.point }}</td>
+							{% endfor %}
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				{% endwith %}
+			{% endif %}
+			{% if change.description %}
+				<h2>Description</h2>
+				<div>{{ change.description_with_references|markdown }}</div>
+			{% endif %}
+			{% if change.gene %}
+				<h2>Gene</h2>
+				<div>
+					<a class="gene gene-link" href="{% url 'atlas.views.gene' change.gene.entrez_id %}"><b>{{ change.gene.symbol }}</b> {{ change.gene.name }}</a>
+					<a href="{% url 'atlas.views.results' %}?l=gene&amp;lid={{ change.gene.entrez_id }}" class="view-more-link">Changes</a>
+				</div>
+			{% endif %}
+			{% if rnodes %}
+				<h2>Relationships</h2>
+				<div class="float-fix">
+				{% for nodes in rnodes %}
+                    {% if forloop.counter == 1  or not forloop.counter|divisibleby:2 %}<div class="tree-row">{% endif %}
+					<ul class="root rel-tree treeview-blue">
+						{% recursetree nodes %}
+							<li>
+								{% if node.change.identifier == change.identifier %}
+									<span class="current {{ node.change.type }}-type">{{ node.change.name }}</span>
+								{% else %}
+									<a class="{{ node.change.type }}-type" href="{% url 'atlas.views.change' node.change.identifier %}">{{ node.change.name }}</a>
+								{% endif %}
+								{% if not node.is_leaf_node %}
+									<ul class="children">
+										{{ children }}
+									</ul>
+								{% endif %}
+							</li>
+						{% endrecursetree %}
+					</ul>
+                    {% if forloop.counter|divisibleby:2 or foorloop.last %}
+                    </div>
+                    {% endif %}
+				{% endfor %}
+				</div>
+			{% endif %}
+			{% if change.properties.count > 0 %}
+				<h2>Properties</h2>
+				<dl>
+				{% for p in change.properties.all %}
+					{% ifchanged p.group %}
+						</dl>
+						<dl>
+						<dt class="group-heading">{{ p.group }}</dt>
+					{% endifchanged %}
+					<dd>{{ p.name }}</dd>
+				{% endfor %}
+				</dl>
+			{% endif %}
+            {% if change.image_set.count > 0 %}
+            <h2>Image gallery</h2>
+            <ul class="image-gallery">
+                {% for i in change.image_set.all %}
+                <li>
+                    <a href="{{i.image.url}}"><img src="{{ i.image.url }}"></a>
+                    <span class="image-caption">{{ i.caption|markdown }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+		</div>
+    </div>
+{% endblock %}
+
+{% block postjs %}
+{% if change.data.dataset.datapoint_set.count > 0 %}
+<script>
+	var data = [{% for point in change.data.dataset.datapoint_set.all %}['{{ point.label }}', {{ point.point }}], {% endfor %}] 
+	var data_measure = "{{ change.process_measured }} {{ change.data.measure }}";
+</script>
+{% endif %}
+{% endblock %}
+{% block extralibs %}
+	<script src="{{ STATIC_URL }}js/libs/jquery.treeview.js"></script> 
+	{% if change.data.dataset.datapoint_set.count > 0 %}
+		<script src="{{ STATIC_URL }}js/libs/d3/d3.min.js"></script>
+		{% if change.data.plot == 'bar' or change.data.plot == 'column' %}<script src="{{ STATIC_URL }}js/simplechart.js"></script>{% endif %}
+	{% endif %}
+{% endblock %}

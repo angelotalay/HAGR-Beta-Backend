@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load sort_buttons %}
+
+{% block content %}
+<h1>Bibliography{% if query %} search: {{query}}{% endif %} ({{count}} entries)</h1>
+<div class="libage-references">
+    <form method="get" action="{{ current_page_url }}" class="libage-sort-controls">
+        <div class="btn-group">
+            <a class="btn disabled">Sort:</a>
+            {% sort_button "-citations" "Number of citations" sort %}
+            {% sort_button "author" "Author" sort %}
+            {% sort_button "title" "Title" sort %}
+            {% sort_button "year" "Year" sort %}
+        </div>
+        <input type="hidden" name="s" value="{{query}}">
+    </form>
+    <ul class="references-list">
+        {% for r in results %}
+        <li class="row-fluid">
+            <p class="span6">{{r.reference|safe}}</p>
+            <div class="span2">
+                <span class="citation-count"> 
+                    <a href="{% url 'libage:entry' r.id %}"><span class="badge">{{r.current_database_citations}}</span> citation{{ r.current_database_citations|pluralize }} in this database</a>
+                </span>
+                {% if r.citations > 0 %}
+                <br>
+                <span class="citation-count"> 
+                    (<a href="{{libage_url}}{{r.url}}"><span class="badge">{{r.citations}}</span> citation{{ r.citations|pluralize }} in connected databases</a>)
+                </span>
+                {% endif %}
+            </div>
+            <div class="span2">
+                <a href="{{libage_url}}{{r.url}}">View in the LibAge database</a>
+            </div>
+            <div class="span2">
+                {% if r.tags|length > 0 %}
+                <ul class="tag-list row">
+                    <li> 
+                        <i class="icon-tags"><span class="acc-hide">Tags:</span></i>
+                    </li>
+                    {% for t in r.tags %}
+                    {% if forloop.counter < 6 %}
+                    <li><a href="{{libage_url}}{{t.url}}" class="label label-warning">{{t.name}}</a></li>
+                    {% endif %}
+                    {% if forloop.counter == 6 %}
+                    <li><a href="{{libage_url}}{{r.url}}" class="label">More tags&hellip;</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="pagination">
+    <ul>
+        <li><a href="?page=1&amp;s={{query}}&amp;sort={{sort}}">First</a></li>
+        {% if num_pages > 1 %}
+            <li><a href="?page={{ previous }}&amp;s={{term}}&amp;sort={{sort}}">Previous</a></li>
+        {% else %}
+            <li class="disabled"><a href="?page={{page}}&amp;s={{term}}&amp;sort={{sort}}">Previous</a></li>
+        {% endif %}
+
+        {% for i in page_range %}
+            {% if i == page %}
+                <li class="active"><a href="?page={{i}}&amp;s={{query}}&amp;sort={{sort}}">{{i}} of {{num_pages}}</a></li>
+            {% else %}
+                <li><a href="?page={{i}}&amp;s={{query}}&amp;sort={{sort}}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if num_pages > 1 %}
+            <li><a href="?page={{ next }}&amp;s={{query}}&amp;sort={{sort}}">Next</a></li>
+        {% else %}
+            <li class="disabled"><a href="?page={{page}}&amp;s={{query}}&amp;sort={{sort}}">Next</a></li>
+        {% endif %}
+        <li><a href="?page={{num_pages}}&amp;s={{query}}&amp;sort={{sort}}">Last</a></li>
+    </ul>
+</div>
+{% endblock %}

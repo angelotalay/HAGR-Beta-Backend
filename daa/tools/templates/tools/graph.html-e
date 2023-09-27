@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block overridestyles %}
+<style>
+line {
+    stroke: black;
+}
+</style>
+{% endblock %}
+
+{% block main %}
+	<h1>Graph</h1>
+	<div id="graph">
+	</div>
+	{% if nothing_saved %}
+	<div class="message centre">
+		<p>It appears you have nothing saved. Please add the changes you would like to graph to the saved list by clicking on one of the add buttons either on the change page or next to an item on the results page.</p>
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block prejs %}
+<script>
+	{% autoescape off %}
+	var graphdata = {{ data }};
+    var setup = {{ setup }}; 
+	{% endautoescape %}
+</script>
+{% endblock %}
+{% block extralibs %}
+	<script src="{{ STATIC_URL }}js/libs/d3/d3.min.js"></script>
+	<script src="{{ STATIC_URL }}js/graph.js"></script>
+{% endblock %}

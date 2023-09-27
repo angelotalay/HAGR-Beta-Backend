@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<h1>Help and Support</h1>
+
+	<div class="yui3-u-1-2">
+		<div class="page-section">
+<h2>Searching</h2>
+
+<p>The Digital Ageing Atlas allows you to use simple search terms to find the information you require. It will search in the following to find results:</p>
+
+<ul>
+<li>Change Name</li>
+<li>Entrez gene ID</li>
+<li>Ensembl gene ID</li>
+<li>Gene name</li>
+<li>Gene symbol</li>
+<li>Gene alias</li>
+<li>Process measured (e.g. Gene Expression Level, DNA Methylation)</li>
+<li>Tissue name</li>
+<li>Tissue synonyms</li>
+<li>Reference title, author, journal and year</li>
+</ul>
+
+
+<p>You can simply press search with no term to get all results in the database.</p>
+
+<h3>Search species</h3>
+
+<p>The Digital Ageing Atlas contains multiple species and allows you to search in all or just those selected. It will be remembered as you pass through the site which option where selected.</p>
+
+<h3>Anatomical model</h3>
+
+<p>The anatomical model allows for a more visual display of data. Hovering over an organ will display the number of changes associated with it. Clicking either the organ or the number of changes will take you to the list of results.</p>
+
+<h3>Types of data</h3>
+
+<p>There are four different classifications of data in the Digital Ageing Atlas:</p>
+
+<ul>
+<li>Molecular, data related to changes on the molecular level such as gene expression changes and protemoics data.</li>
+<li>Physiological, where the data is describing changes that happen on an organ or whole body level (such as greying hair and hormonal changes).</li>
+<li>Psychological, changes of behaviour that occur with age.</li>
+<li>Pathological, including incidence and mortality data for ageing related conditions.</li>
+</ul>
+		</div>
+	</div>
+
+	<div class="yui3-u-1-2 yui-tweak">
+		<div class="page-section">
+<h2>Results</h2>
+
+<p>The initial results page breaks down the number of items found for each type of change and section. Simply clicking on one of them will present you with the results found for your search. By clicking on the title of of a result you can go to the details page; You can also sort the columns by clicking on the header title.</p>
+
+<p>Some types of data, such as gene expression, give you the percentage change that that undergo during ageing. This is also sortable; more information is provided on the details page.</p>
+
+<h3>Filtering</h3>
+
+<p>By using the filtering tool on the right column you can narrow down your results to meet specific criteria. Select the what you wish to filter by and enter any required information. You can add more to the filter by clicking the add another filter button. Unfortunately you cannot have more than one of the same filter type at the current time.</p>
+
+<h3>Saving results</h3>
+
+<p>Some results can be saved to the saved changes list which appears in the right hand columns across the site. If a change can be saved and &ldquo;Add&rdquo; button will be present in the Actions column. Simply clicking it will add it to the list. You can remove items by clicking red cross next to the item in the list, or clicking the clear button to remove all items</p>
+
+<h2>Details pages</h2>
+
+<p>The details pages contain much more information that the results page can show. In the left column some basic information is provided such as the age that changes occur, tissues (including a hierarchical display of where the tissue is) and references. The right (or middle, if changes have been saved) contains the detailed information including descriptions, details of any equations used and links to genes (if a gene is associated with it).</p>
+
+<h2>Using graphs</h2>
+
+<p>You can use the saved changes to make a graph of the differences between changes by clicking the graph button under the saved changes list. This will take the information and display multiple graphs based on the types of data (for instance DNA methylation and Gene expression would be on different graphs).</p>
+		</div>
+	</div>
+
+    <div class="yui3-u-1">
+        <div class="page-section">
+            <p>If you have any further questions or require assistance on using the Digital Ageing Atlas please <a href="{% url atlas.views.contact %}">contacts us</a></p>
+        </div>
+    </div>
+
+{% endblock %}

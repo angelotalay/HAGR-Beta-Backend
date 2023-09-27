@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Bibliography</h1>
+    <ul>
+    {% for r in results %}
+        <li>{{r}}</li> 
+    {% endfor %}
+    </ul>
+{% endblock %}

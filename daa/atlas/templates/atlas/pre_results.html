@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load atlas_extras %}
+
+{% block content %}
+	<div class="yui3-u-1">
+		<h1>{{ title }}</h1>
+		{% if stats.sections|length > 0 or stats.changes|length > 0 %}
+		<ul class="search-results-count">
+		{% for groupname, group in stats.iteritems %}
+			{% if group|length > 0 %}
+				<li class="search-results-title">{{ groupname|capfirst }}</li>
+				{% for name, stat in group.iteritems %}
+					{% with extra_query="{'t': '"|add:name|add:"'}" %}
+					{% if stat.count > 0 %}
+					<li><a href="{% url 'atlas.views.results' %}{{ request.GET|query_string:extra_query }}"><span class="{{name}}-bg">{{stat.count}}</span> {{name|capfirst}}{% if groupname == 'changes' %} change{% endif %}{{ stat.count|pluralize }}</a></li>
+					{% endif %}
+					{% endwith %}
+				{% endfor %}
+			{% endif %}
+		{% endfor %}
+		</ul>
+		{% else %}
+			<div class="message centre text-centre">
+				<p>I'm sorry but we where unable to find any results for your search</p>
+				<p>You can either return <a href="/">home</a> or retry your search with a different term</p>
+				<p>The search supports words, Entrez Gene ID's, Ensembl ID's and gene symbols</p>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

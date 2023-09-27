@@ -1,0 +1,82 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>import</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2>DrugAge</h2>
+            <p>Your data has been successfully imported into the database. You can now edit it through the curator interface.</p>
+            <p>Please do not close the window otherwise the import will not complete!</p>
+            <div class="well"><span id="complete"></span>/<span id="total"></span> imported successfully</div>
+            <table id="failures" class="table table-border">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var data = {{data|safe}};
+        var base_url = '/admin/drugage/drugageresults/import/item/';
+
+        function makeFailureHeader(data) {
+            var tableRow = '<tr>';
+            tableRow += '<th>ID</th>';
+            $.each(data, function(k,d) {
+                tableRow += '<td>'+k+'</td>';
+            });
+            tableRow += '<th>Error</th>';
+            return tableRow+'</tr>';
+        }
+
+        function makeFailureRow(data, errorText) {
+            var tableRow = '<tr>';
+            tableRow += '<td>'+data['rid']+'</td>';
+            $.each(data['data'], function(k,d) {
+                tableRow += '<td>'+d+'</td>';
+            });
+            tableRow += '<td><textarea rows="10">'+errorText+'</textarea></td>';
+            return tableRow+'</tr>';
+        }
+
+        $(document).ready(function() {
+            var total = data.length;
+            var complete = 0;
+            $('#total').html(total);
+            $('#failures thead').html(makeFailureHeader(data[0]['data']));
+            $.each(data, function(i, d) {
+                var jhqr = $.post(base_url+d['rid']+'/', d['data'], function() {
+                    console.log('success');
+                    complete++;
+                    $('#complete').html(complete);
+                }).fail(function(e) {
+                    console.log('failed');
+                    $('#failures tbody').append(makeFailureRow(d, e.responseText));
+                });
+            });
+        });
+    </script>
+{% endblock %}

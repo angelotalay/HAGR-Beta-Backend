@@ -1,0 +1,47 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">&raquo;</span>
+        </li>
+        <li>
+            import
+        </li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2 id="import-status">Processing Import...</h2>
+            <p>Your data has been successfully imported into the database. You can now edit it through the curator interface.</p>
+            <h3>The following changes have been created:</h3>
+            <ol id="changes-added">
+            </ol>
+        </div>
+    </div>
+    <script>
+        var IMPORT_DATA = {{data|safe}};
+        var IMPORT_URL = "{% url 'admin:atlas_ajax_import_change' %}";
+        var CSRF_TOKEN = "{{csrftoken}}";
+    </script>
+    <script src="/static/js/libs/jquery-1.6.4.min.js"></script>
+    <script src="/static/js/import_changes.js"></script>
+{% endblock %}

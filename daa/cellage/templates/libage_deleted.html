@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>Delete citations from LibAge</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2>Citations deleted from LibAge</h2>
+            <div class="alert alert-info">
+                <p>All citations for the CellAge database have been deleted from LibAge. The references have not so importing should be quicker than a from scratch import. 
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% for var,value in request.GET.lists %}
+	{% if var in keys %}
+		{% if value|length > 1 %}
+			{% for sv in value %}
+				<input type="hidden" name="{{ var }}" value="{{ sv }}" />
+			{% endfor %}
+		{% else %}
+			<input type="hidden" name="{{ var }}" value="{{ value|first }}" />
+		{% endif %}
+	{% endif %}
+{% endfor %}

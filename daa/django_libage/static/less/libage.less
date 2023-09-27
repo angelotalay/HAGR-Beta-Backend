@@ -1,0 +1,101 @@
+@import "variables.less";
+@import "mixins.less";
+@import "buttons.less";
+@import "button-groups.less";
+@import "labels-badges.less";
+@import "sprites.less";
+@import "pagination.less";
+@import "grid.less";
+
+@iconSpritePath: "/static/img/glyphicons-halflings.png";
+
+.acc-hide {
+    display: inline-block;
+    text-indent: -9999em;
+}
+
+.libage-sort-controls {
+    margin: auto;
+    width: 30em;
+}
+
+.libage-references {
+    margin: 1em;
+    overflow: hidden;
+    a {
+        text-decoration: none;
+    }
+    .references-list > li {
+        border-bottom: 1px dotted silver;
+        overflow: hidden;
+        padding: 1em; 
+    }
+}
+
+.tag-list {
+    list-style: none;
+    margin: 0.5em;
+    padding: 0;
+    li {
+        margin: 0;
+        padding: 0 0.25em 0.25em 0;
+        float: left;
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: normal;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.libage-reference-list {
+    margin: 1em;
+    padding: 0;
+    list-style: none;
+}
+
+.libage-reference-list li {
+    margin-bottom: 1em;
+}
+
+.libage-references li p {
+    padding: 0;
+    margin: 0 !important;
+}
+
+.libage-link-container {
+    margin: 0.5em 0 0 0 !important;    
+    padding: 0 !important;
+}
+
+.libage-reference-details-link:before {
+    content: "●";
+    padding-right: 0.3em;
+    vertical-align: text-top;
+    font-size: 1.5em;
+    color: #E6AA19;
+}
+
+.libage-reference-details-link {
+    padding: 0.5em 0 0 0;
+    line-height: 1em;
+    text-decoration: none;
+}
+
+.libage-entry-link {
+    float: right;
+}
+
+.libage-link {
+    padding: 1em;
+    font-size: 0.8em;
+    text-decoration: none;
+}
+
+.citation-count {
+    display: inline-block;
+    margin-bottom: 0.5em;
+}

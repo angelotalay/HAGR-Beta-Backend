@@ -1,0 +1,106 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>{% block title %}{{ title|striptags }} | The Digital Ageing Atlas{% endblock %}</title>
+	<meta name="description" content="{% block meta_description %}{{ meta_description|default:'The Digital Ageing Atlas, the portal of ageing related changes' }}{% endblock %}">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/grids-min.css">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" class="cssfx">
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/libage.css">
+	{% block overridestyles %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+	<script src="{{ STATIC_URL }}js/libs/respond.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<script src="{{ STATIC_URL }}js/libs/cssfx.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div id="wrap">
+		<div id="container" class="yui3-g">
+			<header id="page-header" class="yui3-u-1">
+				<div class="daa-logo-mid yui3-u-5-8"><a href="/">The Digital Ageing Atlas</a></div>
+				<div class="yui3-u-3-8 yui-tweak header-right">
+					<ul class="header-navigation yui3-u-1-2 yui-tweak">
+						<li class="header-navigation-title">Navigation</li>
+						<li><a href="{% url 'daa.atlas.views.about' %}">About</a></li>
+						<li><a href="{% url 'daa.atlas.views.help' %}">Help</a></li>
+						<li><a href="{% url 'daa.atlas.views.downloads' %}">Downloads</a></li>
+						<li><a href="{% url 'daa.atlas.views.contact' %}">Contact or contribute</a></li>
+					</ul>
+					<form method="get" action="{% url 'daa.atlas.views.results' %}" class="header-search yui3-u-1-2 yui-tweak">
+						<span class="header-search-title">Search</span>
+						<input class="header-search-search" type="search" placeholder="e.g. IGF1, heart, wrinkles" name="s" value="{{ s }}" />
+						<div class="header-search-toggles">
+							{{ species_options }}
+						</div>
+						<button class="button" type="submit">Search</button>
+                        <a class="anatomical-model-nav-link" href="{% url 'daa.atlas.views.anatomical' %}">Use anatomical model</a>
+					</form>
+				</div>
+			{% block header %}{% endblock %}
+			</header>
+			<div id="main" role="main" class="yui3-u-1">
+			    {% if use_sidebar %}<div id="main-content" class="yui3-u-4-5">{% else %}<div id="main-content" class="yui3-u-1">{% endif %}
+				    {% block content %}{% endblock %}
+                </div>
+			{% if use_sidebar %}
+				<div id="sidebar" class="yui3-u-1-5 yui-tweak">
+					{% block sidebar %}
+					{% endblock %}
+					{% if request.session.saved %}
+					<div class="sidebar-module saved-changes">
+						<h2>Saved Changes</h2>
+						You have <b>{{ request.session.saved|length }}</b> changes saved
+						<ul>
+						{% for item, details in request.session.saved.iteritems %}
+							<li>
+							<form method="post" action="{% url 'daa.atlas.views.saved' "remove" %}">
+								{% csrf_token %}
+								<input type="hidden" name="url" value="{{ request.get_full_path }}" />
+								<input type="hidden" name="id" value="{{ item }}" />
+								<a class="{{ details.1 }}-type" href="{% url 'daa.atlas.views.change' item %}">{{ details.0 }}</a>
+								<button type="submit" class="button small red-button fright">&#x2716;</button>
+							</form>
+							</li>
+						{% endfor %}
+						</ul>
+						<form method="post" action="{% url 'daa.atlas.views.saved' "clear" %}">
+							{% csrf_token %}
+							<input type="hidden" name="url" value="{{ request.get_full_path }}" />
+							<a class="button blue-button" href="{% url 'tools.views.graph' %}">Graph</a>
+							<button type="submit" class="button">Clear</button>
+						</form>
+					</div>
+					{% endif %}
+				</div>
+			{% endif %}
+			</div>
+		</div>
+	</div>
+	<footer id="footer" class="yui3-u-1">
+	{% block footer %}{% endblock %}
+    <p>{{version}} <a href="/static/downloads/readme.html">Database build 5</a></p>
+	</footer>
+	{% block prejs %}{% endblock %}
+	<script src="{{ STATIC_URL }}js/libs/jquery-1.6.4.min.js"></script>
+	{% block extralibs %}{% endblock %}
+	<script src="{{ STATIC_URL }}js/ui.js"></script>
+	{% block postjs %}{% endblock %}
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-40611056-1', 'ageing-map.org');
+      ga('send', 'pageview');
+
+    </script>
+</body>
+</html>

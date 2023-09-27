@@ -1,0 +1,207 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n %}
+
+{% block bodyclass %}change-list{% endblock %}
+
+{% if not is_popup %}
+  {% block breadcrumbs %}
+    <ul class="breadcrumb">
+        <li>
+            <a href="../../../">
+                {% trans "Home" %}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>
+            <a href="../">
+                {{ app_label|capfirst }}
+            </a>
+            <span class="divider">»</span>
+        </li>
+        <li>import</li>
+    </ul>
+  {% endblock %}
+{% endif %}
+
+{% block coltype %}flex{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+        <div class="module" >
+            <h2>Data import v0.1</h2>
+            <p>This form allows you to import data into DrugAge.</p>
+            <p>You will need to clear the database before you load the data.</p>
+            <ol>
+                <li>
+                    <p>Select your comma seperated text file and submit</p>
+                    <form id="import-uploadform" action="{% url 'admin:drugage_csvimport' %}" method="post" enctype="multipart/form-data">{% csrf_token %} 
+                        <input type="file" name="datafile" />
+                        <button type="submit" class="button blue-button">Submit</button>
+                    </form>
+                </li>
+                <li><p>All data to be imported is shown. Errors should be reported. If there are errors, make the changes and resubmit.</p></li>
+                <li><p>Your data is then imported into the database</p></li>
+            </ol>
+            <!--
+            <h2>Formatting your data</h2>
+            <p>The data must be in the form of a tab seperated text file with a header matching one of the following list of columns</p> 
+            <p>Please ensure that the columns are named exactly as specified below. Any mistakes will mean that the column is not recongised and the data will not be imported. You will be able to see these issues on the next step.</p>
+            <p>Data is perfered to be in UTF-8 for correct support of mathmatical, scientific and international charecters though ASCII can be used (If ASCII is used on interntional charecters they will be replaced by a ?).</p>
+            <h3>Accepted columns</h3>
+            <p>The columns that are highlighted are required for the import to work</p>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>Column</th>
+                    <th>Options</th>
+                    <th>Description</th>
+                    <th>Required</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>entrez_id</strong></td>
+                        <td></td>
+                        <td>An NCBI Entrez gene ID</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td></td>
+                        <td>Name of the gene</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>symbol</strong></td>
+                        <td></td>
+                        <td>The gene symbol</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>organism</strong></td>
+                        <td></td>
+                        <td>The taxonomic name for the organism e.g. Mus musculus</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>alias</td>
+                        <td></td>
+                        <td>Any aliases that the gene may have</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>avg_lifespan_change_desc</td>
+                        <td></td>
+                        <td>A description explaining the numerical entry in avg_lifespan_change</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>max_lifespan_change_desc</td>
+                        <td></td>
+                        <td>A description explaining the numerical entry in max_lifespan_change</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>avg_lifespan_change</td>
+                        <td></td>
+                        <td>Percentage (without % sign) describing the average change in lifespan</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>lifespan_effect</td>
+                        <td>increase | decrease</td>
+                        <td>Does the change increase or decrease lifespan?</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>longevity_influence</td>
+                        <td>anti | pro</td>
+                        <td>I have no idea what this column actually is!</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>max_lifespan_change</td>
+                        <td></td>
+                        <td>Percentage (without % sign) describing the maximum change in lifespan</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>phenotype_description</td>
+                        <td></td>
+                        <td>Description of changes to the phenotype</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>hidden</td>
+                        <td>1 | 0</td>
+                        <td>Value indicatting if the entry is to be hidden</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><strong>pubmed</strong></td>
+                        <td></td>
+                        <td>NCBI PubMed ID</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
+                        <td>method</td>
+                        <td></td>
+                        <td>Method by which the change in age occurs e.g. Knockout</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>notes</td>
+                        <td></td>
+                        <td>Any notes on the entry that idicate issues (for instance why the change is hidden) or just general comments to help other curators</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3>An example</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                    <th>entrez_id</th>
+                    <th>name</th>
+                    <th>symbol</th>
+                    <th>organism</th>
+                    <th>alias</th>
+                    <th>avg_lifespan_change_desc</th>
+                    <th>max_lifespan_change_desc</th>
+                    <th>avg_lifespan_change</th>
+                    <th>lifespan_effect</th>
+                    <th>longevity_influence</th>
+                    <th>max_lifespan_change</th>
+                    <th>phenotype_description</th>
+                    <th>hidden</th>
+                    <th>pubmed</th>
+                    <th>method</th>
+                    <th>notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td>12345</td>
+                    <td>Example gene 1</td>
+                    <td>EG1</td>
+                    <td>Mus Musculus</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>10.5</td>
+                    <td>increase</td>
+                    <td>anti</td>
+                    <td>12</td>
+                    <td>Mouse showed an increase in lifespan when knockout present</td>
+                    <td></td>
+                    <td>456789</td>
+                    <td>knockout</td>
+                    <td>This is just an example gene</td>
+                    </tr>
+                </tbody>
+            </table>
+            -->
+        </div>
+    </div>
+{% endblock %}

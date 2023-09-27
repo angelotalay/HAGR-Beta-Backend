@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+
+{% block sidebar %}
+    <div class="sidebar-module">
+        <h2>Export results</h2>
+        <p>Export the results of your search to a tab separated text file for further analysis</p>
+        <form action="" method="get">
+            {% for var, value in request.GET.lists %}
+                {% for v in value %}
+                    <input type="hidden" name="{{ var }}" value="{{v}}" />
+                {% endfor %}
+            {% endfor %}
+            <input type="hidden" value="True" name="export" />
+            <button type="submit" class="button blue-button">Export results</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block content %}
+	
+    <div class="yui3-u-1 details-header reference-bg">
+        <h1>{{ ref|safe }} ({{table.paginator.count}} entries)</h1>
+    </div>	
+
+	<div class="yui3-u-1 details-column large-column">
+        <div>
+			<h2>Changes associated with this reference</h2>
+			{% render_table table 'atlas/table.html' %}
+		</div>
+	</div>
+
+{% endblock %}

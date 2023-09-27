@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load django_tables2 %}
+{% load markup %}
+{% load mptt_tags %}
+{% load markdown_deux_tags %}
+
+{% block overridestyles %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/jquery.treeview.css">
+{% endblock %}
+
+{% block content %}
+	
+    <div class="yui3-u-1 details-header tissue-bg">
+        <h1>{{ tissue.name|title }}</h1>
+    </div>	
+
+    <div class="yui3-u-1-3 details-column small-column">
+        <div>
+			{% if tissue.synonyms %}
+			<h2>Synonyms</h2>
+			<div>{{ tissue.synonyms }}</div>
+			{% endif %}
+			{% if tissue.description %}
+            <h2>Description</h2>
+			<div>{{ tissue.description|markdown }}</div>
+			{% endif %}
+			<h2>Structure</h2>
+			<div>
+				<ul class="root tissue-tree visible treeview-blue">
+					{% recursetree nodes %}
+						<li>
+                        <span {% if node.name == tissue.name %}class="current"{% endif %}>{{node.name}}</span> {% if node.number_of_changes > 0 %}<a href="{% url 'atlas.views.tissue' node.evid %}">{{ node.number_of_changes }} &#x27a5;</a>{% endif %}
+							{% if not node.is_leaf_node %}
+								<ul class="children">
+									{{ children }}
+								</ul>
+							{% endif %}
+						</li>
+					{% endrecursetree %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="yui3-u-2-3 yui-tweak details-column large-column">
+        <div class="no-left-margin">
+			
+			<h2>Changes associated with this tissue</h2>
+            {% if changes|length > 0 %}
+            <div>
+                <p>Due to the potentially large amount of high-throughput molecular changes these have been excluded below. You can  view the full list of {{change_count|add:molecular_total}} changes <a href="{% url 'atlas.views.results' %}?l=tissue&amp;lid={{ tissue.evid }}"> through the filter results page.</a>
+            </div>
+            <div>
+                {% for t,cl in changes.items %}
+                <h3>{{t|title}} ({{cl|length}}{% if t == 'molecular'%}; {{molecular_total}} in total{% endif %}) <a href="{% url 'atlas.views.results' %}?l=tissue&amp;lid={{ tissue.evid }}&amp;type={{t}}" class="fright view-more-link">View on results page</a></h3>
+                    {% if t == 'molecular' %}
+                    <p>Changes from high-throughput approaches are excluded but can be viewed on the <a href="{% url 'atlas.views.results' %}?l=tissue&amp;lid={{ tissue.evid }}&amp;type={{t}}">results page</a>.</p>
+                    {% endif %}
+                    <div class="tissue-change-cloud {{t}}-text">
+                    {% for c in cl %}
+                    <a href="{% url 'atlas.views.change' c.identifier %}" class="tissue-change-cloud-item">{{ c.name }}</a>
+                    {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div>
+                <p>There are no changes associated with this tissue.</p>
+            </div>
+            {% endif %}
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block extralibs %}
+    <script src="{{ STATIC_URL }}js/libs/jquery.treeview.js"></script>
+{% endblock %}
