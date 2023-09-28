@@ -1,6 +1,7 @@
 #User made files
+env3/
 .env
-Dockerfile
+database_containers/*
 *.sql
 .DS_Store
 .AppleDouble

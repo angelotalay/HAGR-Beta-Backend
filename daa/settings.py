@@ -28,84 +28,91 @@ TEMPLATE_DEBUG = True
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'beta_daa',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': 'postgres',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'beta_daa',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '',
+        'PORT': '',
     },
     'libage': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'la',                      # Or path to database file if using sqlite3.
-        'USER': 'postgres',                      # Not used with sqlite3.
-        'PASSWORD': 'postgres',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': 'la',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '',
+        'PORT': '',
     },
     'ortholog': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_orthologs',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_orthologs',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'genage_human': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_genage_human',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_genage_human',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'genage_model': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_genage_models',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_genage_models',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'anage': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_anage',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_anage',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'gendr': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_gendr',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_gendr',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'longevity': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_longevity',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_longevity',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'drugage': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_drug_age',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_drug_age',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
     },
     'cellage': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'dev_cell_age',                      # Or path to database file if using sqlite3.
-        'USER': 'daa_curator',                      # Not used with sqlite3.
-        'PASSWORD': 'daa_curator_51t3',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dev_cell_age',
+        'USER': 'daa_curator',
+        'PASSWORD': 'daa_curator_51t3',
+        'HOST': '',
+        'PORT': '',
+    }
+}
+
+DATABASES = {
+    "drugage":{
+        "ENGINE": "django.db.backends.mysql",
+        "NA"
     }
 }
 
