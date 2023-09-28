@@ -1,7 +1,7 @@
 import sys
 # Django settings for daa project.
 
-###
+### This should probably be as environment variables?
 # django-libage settings
 # The URL of the api
 LIBAGE_ENDPOINT = 'http://la.ageing-map.org/api'
@@ -108,6 +108,7 @@ DATABASES = {
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
+
 
 
 # Local time zone for this installation. Choices can be found here:

@@ -1,3 +1,7 @@
+#User made files
+.env
+Dockerfile
+*.sql
 .DS_Store
 .AppleDouble
 .LSOverride

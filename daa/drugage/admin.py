@@ -1,7 +1,6 @@
 import json
 import csv
 import StringIO
-
 from django.db import IntegrityError
 from django.contrib import admin
 from django.conf.urls import *
@@ -14,7 +13,6 @@ from django.core.urlresolvers import reverse
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from mptt.admin import MPTTModelAdmin
-
 from reversion.admin import VersionAdmin
 
 from daa.drugage.models import DrugAgeResults, DrugAgeBiblio, DrugAgeCompounds, DrugAgeCompoundSynonyms
