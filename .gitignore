@@ -1,7 +1,6 @@
 #User made files
 env3/
 .env
-database_containers/*
 *.sql
 .DS_Store
 .AppleDouble

@@ -1,5 +1,5 @@
 import sys
-
+import os
 # Django settings for daa project.
 
 ### This should probably be as environment variables?
@@ -31,80 +31,80 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'beta_daa',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
         'HOST': 'postgres-db', #CHANGED FOR TESTING
         'PORT': '5432',
     },
     'libage': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'la',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'USER': os.environ.get("POSTGRES_USER"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
         'HOST': 'postgres-db',
         'PORT': '5432',
     },
     'ortholog': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_orthologs',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'genage_human': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_genage_human',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'genage_model': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_genage_models',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'anage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_anage',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'gendr': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_gendr',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'longevity': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_longevity',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'drugage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_drug_age',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     },
     'cellage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_cell_age',
-        'USER': 'daa_curator',
-        'PASSWORD': 'daa_curator_51t3',
+        'USER': os.environ.get("MYSQL_USER"),
+        'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': 'mysql-db',
         'PORT': '3306',
     }
@@ -169,7 +169,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '^re%aq%yp$)al($)%0wwu1o!dkb35l9y!$=s)zyodb409-_dhg'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 TEMPLATES = [
     {

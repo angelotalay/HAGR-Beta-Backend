@@ -3,7 +3,11 @@ version: "3"
 services:
   mysql-db:
     image: beta-hagr-mysql
-    build: database_containers/mysql/
+    env_file:
+      - .env
+    build:
+      context: database_containers/mysql/
+      dockerfile: Dockerfile
     container_name: mysql-db
     ports:
       - "3306:3306"
@@ -13,7 +17,11 @@ services:
       - hagr-shared-network
   postgres-db:
     image: beta-hagr-postgres
-    build: database_containers/postgres/
+    env_file:
+      - .env
+    build:
+      context: database_containers/postgres/
+      dockerfile: Dockerfile
     container_name: postgres-db
     ports:
       - "5432:5432"
@@ -23,7 +31,11 @@ services:
       - hagr-shared-network
   app:
     image: beta-hagr-app
-    build: app/
+    env_file:
+      - .env
+    build:
+      context: app/
+      dockerfile: Dockerfile
     container_name: app
     ports:
       - "8000:8000"
