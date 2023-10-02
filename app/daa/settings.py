@@ -1,4 +1,5 @@
 import sys
+
 # Django settings for daa project.
 
 ### This should probably be as environment variables?
@@ -12,7 +13,7 @@ LIBAGE_DATABASE = 'daa'
 ###
 
 ABSOLUTE_PATH = '/srv/www/beta.ageing-map.org/daa'
-sys.path.append(ABSOLUTE_PATH+'/lib')
+sys.path.append(ABSOLUTE_PATH + '/lib')
 
 ALLOWED_HOSTS = ['localhost', '.ageing-map.org']
 
@@ -20,11 +21,11 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-#ADMINS = (
+# ADMINS = (
 #    ('Daniel Thornton', 'daniel.thornton@liverpool.ac.uk'),
-#)
+# )
 
-#MANAGERS = ADMINS
+# MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
@@ -32,90 +33,82 @@ DATABASES = {
         'NAME': 'beta_daa',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'postgres-db', #CHANGED FOR TESTING
+        'PORT': '5432',
     },
     'libage': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'la',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'postgres-db',
+        'PORT': '5432',
     },
     'ortholog': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_orthologs',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'genage_human': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_genage_human',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'genage_model': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_genage_models',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'anage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_anage',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'gendr': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_gendr',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'longevity': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_longevity',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'drugage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_drug_age',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     },
     'cellage': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dev_cell_age',
         'USER': 'daa_curator',
         'PASSWORD': 'daa_curator_51t3',
-        'HOST': '',
-        'PORT': '',
+        'HOST': 'mysql-db',
+        'PORT': '3306',
     }
 }
-
-DATABASES = {
-    "drugage":{
-        "ENGINE": "django.db.backends.mysql",
-        "NA"
-    }
-}
-
 
 
 # Local time zone for this installation. Choices can be found here:
@@ -143,7 +136,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ABSOLUTE_PATH+'/media'
+MEDIA_ROOT = ABSOLUTE_PATH + '/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -154,7 +147,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ABSOLUTE_PATH+'/static/'
+STATIC_ROOT = ABSOLUTE_PATH + '/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -165,7 +158,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-	ABSOLUTE_PATH+'/resources',
+    ABSOLUTE_PATH + '/resources',
 )
 
 # List of finder classes that know how to find static files in
@@ -182,10 +175,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-           ABSOLUTE_PATH+'/templates/',
-           ABSOLUTE_PATH+'/atlas/templates/atlas/',
-           ABSOLUTE_PATH+'/tools/templates/tools/',
-           ABSOLUTE_PATH+'/go_db/templates/go_db/',
+            ABSOLUTE_PATH + '/templates/',
+            ABSOLUTE_PATH + '/atlas/templates/atlas/',
+            ABSOLUTE_PATH + '/tools/templates/tools/',
+            ABSOLUTE_PATH + '/go_db/templates/go_db/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -195,7 +188,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'daa.version.context_processors.version',
-	        'django.template.context_processors.request',
+                'django.template.context_processors.request',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
@@ -249,7 +242,11 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
-DATABASE_ROUTERS = ['daa.genage_human.router.GenageRouter', 'daa.genage_model.router.GenageRouter', 'daa.anage.router.AnageRouter', 'daa.gendr.router.GendrRouter', 'daa.django_libage.router.LibageRouter', 'daa.longevity.router.LongevityRouter', 'daa.ortholog.router.OrthologRouter', 'daa.drugage.router.DrugAgeRouter','daa.cellage.router.CellAgeRouter']#, 'daa.go_db.router.GORouter']
+DATABASE_ROUTERS = ['daa.genage_human.router.GenageRouter', 'daa.genage_model.router.GenageRouter',
+                    'daa.anage.router.AnageRouter', 'daa.gendr.router.GendrRouter',
+                    'daa.django_libage.router.LibageRouter', 'daa.longevity.router.LongevityRouter',
+                    'daa.ortholog.router.OrthologRouter', 'daa.drugage.router.DrugAgeRouter',
+                    'daa.cellage.router.CellAgeRouter']  # , 'daa.go_db.router.GORouter']
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'HAGR Curator',
@@ -320,9 +317,9 @@ SUIT_CONFIG = {
             {'url': 'admin:cellage_clearlibage', 'label': u'Delete citations from LibAge'},
         )},
         '-',
-        {'label': 'Submissions', 'icon': 'icon-inbox', 'models': ('submissions.submission',) },
+        {'label': 'Submissions', 'icon': 'icon-inbox', 'models': ('submissions.submission',)},
         '-',
-        {'label': 'Admin', 'icon': 'icon-cog', 'models': ('auth.user', 'auth.group', 'admin.logentry') },
+        {'label': 'Admin', 'icon': 'icon-cog', 'models': ('auth.user', 'auth.group', 'admin.logentry')},
     ),
 }
 

@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  mysql-db:
+    image: beta-hagr-mysql
+    build: database_containers/mysql/
+    container_name: mysql-db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - hagr-shared-network
+  postgres-db:
+    image: beta-hagr-postgres
+    build: database_containers/postgres/
+    container_name: postgres-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - hagr-shared-network
+  app:
+    image: beta-hagr-app
+    build: app/
+    container_name: app
+    ports:
+      - "8000:8000"
+    networks:
+      - hagr-shared-network
+volumes:
+  mysql_data:
+  postgres_data:
+networks:
+  hagr-shared-network:
+    driver: bridge
