@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt
 from mptt.admin import MPTTModelAdmin
 from reversion.admin import VersionAdmin
 
-from daa.drugage.models import DrugAgeResults, DrugAgeBiblio, DrugAgeCompounds, DrugAgeCompoundSynonyms
+from daa.drugage.models import DrugAgeResults, DrugAgeBiblio, DrugAgeCompounds, DrugAgeCompoundSynonyms, AverageLifespan, MaxLifespan
 from daa.django_libage.models import BibliographicEntry, Citation, Tag, Source
 from daa.atlas.admin_widgets import SelectableForeignKeyRawIdWidget, EditForeignKeyRawIdWidget, GeneLookupWidget, ReferenceLookupWidget 
 from daa.atlas.fetch import FetchGene, FetchReference, FetchDetails
@@ -39,11 +39,11 @@ class DrugAgeBiblioAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author', 'journal', 'publisher', 'editor', 'pubmed')
 
 class DrugAgeResultsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'compound_id', 'species', 'strain', 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes','last_modified')
+    list_display = ('id', 'compound_id', 'species', 'strain', 'significance' , 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes','last_modified', 'max_lifespan', 'average_lifespan')
     list_display_links = ('id','compound_id')
     ordering = ('-last_modified',)
  
-    search_fields = ('compound_id__compound_name', 'species', 'strain', 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes')
+    search_fields = ('compound_id__compound_name', 'species', 'age_at_treatment', 'strain', 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes')
 
     def get_urls(self):
         urls = super(DrugAgeResultsAdmin, self).get_urls()
@@ -187,7 +187,20 @@ class DrugAgeResultsAdmin(admin.ModelAdmin):
 
             return HttpResponse('Complete', content_type="text/plain")
 
+class AverageLifespanAdmin(admin.ModelAdmin):
+    list_display = ('id', 'p_value', 'average_lifespan_change_percent')
+    search_fields = ('p_value', 'average_lifespan_change_percent')
+
+class MaxLifespanAdmin(admin.ModelAdmin):
+    list_display = ('id', 'p_value', 'max_lifespan_change_percent')
+    search_fields = ('p_value', 'max_lifespan_change_percent')
+
+
+
+##Register the admin models here
 admin.site.register(DrugAgeResults, DrugAgeResultsAdmin)
 admin.site.register(DrugAgeBiblio, DrugAgeBiblioAdmin)
 admin.site.register(DrugAgeCompounds, DrugAgeCompoundsAdmin)
 admin.site.register(DrugAgeCompoundSynonyms, DrugAgeCompoundSynonymsAdmin)
+admin.site.register(AverageLifespan, AverageLifespanAdmin)
+admin.site.register(MaxLifespan, MaxLifespanAdmin)

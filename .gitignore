@@ -1,6 +1,7 @@
 #User made files
 env3/
 .env
+*.tar
 *.sql
 .DS_Store
 .AppleDouble

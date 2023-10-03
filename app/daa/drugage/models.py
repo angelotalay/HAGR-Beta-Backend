@@ -51,9 +51,33 @@ class DrugAgeCompounds(models.Model):
     def __unicode__(self):
         return self.compound_name
 
+class DrugAgeLifespan(models.Model):
+    p_value = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    class Meta:
+        abstract = True
+
+class MaxLifespan(DrugAgeLifespan):
+    max_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    class Meta:
+        managed = True
+        db_table = 'max_lifespan'
+        verbose_name = 'Max Lifespan (% Change)'
+    def __str__(self):
+        return "{} : p-value={}".format(self.max_lifespan_change_percent, self.p_value)
+
+class AverageLifespan(DrugAgeLifespan):
+    average_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    class Meta:
+        managed= True
+        db_table = 'average_lifespan'
+        verbose_name = 'Average Lifespan (% Change)'
+    def __str__(self):
+        return "{} : p-value={}".format(self.average_lifespan_change_percent, self.p_value)
+
+
 class DrugAgeResults(models.Model):
     class Meta:
-        managed = False
+        managed = True
         db_table = 'results'
         verbose_name = 'Results'
         verbose_name_plural = 'Results'
@@ -74,16 +98,19 @@ class DrugAgeResults(models.Model):
     id = models.AutoField(max_length=11, primary_key=True)
     compound_id = models.ForeignKey(DrugAgeCompounds, db_column='compound_id', on_delete=models.CASCADE)
     species = models.CharField(blank=True, null=True, max_length=255)
+    age_at_treatment = models.IntegerField(max_length=3, blank=True, null=True)
+    gender = models.CharField(blank=True, null=True, choices=GENDER_CHOICES, max_length=15)
     strain = models.CharField(blank=True, null=True, max_length=255)
     dosage = models.CharField(blank=True, null=True, max_length=100)
     avg_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     max_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
-    gender = models.CharField(blank=True, null=True, choices=GENDER_CHOICES, max_length=15)
     significance = models.CharField(null=True, blank=True,choices=SIG_CHOICES, max_length=255)
     pubmed_id = models.IntegerField(max_length=11, null=False)
     notes = models.CharField(blank=True, null=True, max_length=2000)
     last_modified = models.DateTimeField(auto_now=True)
     biblio_id = models.ForeignKey(DrugAgeBiblio, db_column='biblio_id', on_delete=models.CASCADE)
+    max_lifespan = models.ForeignKey(MaxLifespan, db_column='max_lifespan', on_delete=models.CASCADE, null=True, blank=True)
+    average_lifespan = models.ForeignKey(AverageLifespan, db_column='average_lifespan', on_delete=models.CASCADE, null=True, blank=True)
 
     def __unicode__(self):
         return str(self.compound_id)
