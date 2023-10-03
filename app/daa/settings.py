@@ -1,7 +1,9 @@
 import sys
 import os
+from dotenv import load_dotenv
 # Django settings for daa project.
 
+load_dotenv()
 ### This should probably be as environment variables?
 # django-libage settings
 # The URL of the api

@@ -141,7 +141,7 @@ class CustomIndexDashboard(Dashboard):
                                         children = [
                                                 modules.ModelList(
                                                         title='Database',
-                                                        models=('daa.drugage.models.DrugAgeResults', 'daa.drugage.models.DrugAgeBiblio','daa.drugage.models.DrugAgeCompounds','daa.drugage.models.DrugAgeCompoundSynonyms'),
+                                                        models=('daa.drugage.models.DrugAgeResults', 'daa.drugage.models.DrugAgeBiblio','daa.drugage.models.DrugAgeCompounds','daa.drugage.models.DrugAgeCompoundSynonyms', 'daa.drugage.models.AverageLifespan', 'daa.drugage.models.MaxLifespan')
                                                 ),
                                                 modules.LinkList(
                                                         title = 'Actions',
