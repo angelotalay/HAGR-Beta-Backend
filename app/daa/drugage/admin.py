@@ -29,19 +29,22 @@ from daa.atlas.admin_forms import ReferenceAdminForm
 class DrugAgeCompoundsAdmin(admin.ModelAdmin):
     list_display = ('id','compound_name','cas_number','pubchem_cid','iupac_name')
     search_fields = ('compound_name', 'cas_number', 'pubchem_cid', 'iupac_name')
-
+    ordering = ["compound_name"]
 class DrugAgeCompoundSynonymsAdmin(admin.ModelAdmin):
     list_display = ('id','compound_id','synonym')
     search_fields = ('compound_id__compound_name', 'synonym')
 
-class DrugAgeBiblioAdmin(admin.ModelAdmin):
 
+class DrugAgeBiblioAdmin(admin.ModelAdmin):
     search_fields = ('title', 'author', 'journal', 'publisher', 'editor', 'pubmed')
+    list_display = ('id_biblio', 'pubmed', 'title', 'author', 'journal', 'publisher', 'editor', 'year')
+
 
 class DrugAgeResultsAdmin(admin.ModelAdmin):
     list_display = ('id', 'compound_id', 'species', 'strain', 'significance' , 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes','last_modified', 'max_lifespan', 'average_lifespan')
     list_display_links = ('id','compound_id')
     ordering = ('-last_modified',)
+    # raw_id_fields = ['compound_id', 'biblio_id']
  
     search_fields = ('compound_id__compound_name', 'species', 'age_at_treatment', 'strain', 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes')
 
