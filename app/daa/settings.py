@@ -35,7 +35,7 @@ DATABASES = {
         'NAME': 'beta_daa',
         'USER': os.environ.get("POSTGRES_USER"),
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': 'postgres-db', #CHANGED FOR TESTING
+        'HOST': os.environ.get("POSTGRES_HOST"), #CHANGED FOR TESTING
         'PORT': '5432',
     },
     'libage': {
@@ -43,7 +43,7 @@ DATABASES = {
         'NAME': 'la',
         'USER': os.environ.get("POSTGRES_USER"),
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': 'postgres-db',
+        'HOST': os.environ.get("POSTGRES_HOST"),
         'PORT': '5432',
     },
     'ortholog': {
@@ -51,7 +51,7 @@ DATABASES = {
         'NAME': 'dev_orthologs',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'genage_human': {
@@ -59,7 +59,7 @@ DATABASES = {
         'NAME': 'dev_genage_human',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'genage_model': {
@@ -67,7 +67,7 @@ DATABASES = {
         'NAME': 'dev_genage_models',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'anage': {
@@ -75,7 +75,7 @@ DATABASES = {
         'NAME': 'dev_anage',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'gendr': {
@@ -83,7 +83,7 @@ DATABASES = {
         'NAME': 'dev_gendr',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'longevity': {
@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'dev_longevity',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'drugage': {
@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': 'dev_drug_age',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     },
     'cellage': {
@@ -107,7 +107,7 @@ DATABASES = {
         'NAME': 'dev_cell_age',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
-        'HOST': 'mysql-db',
+        'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
     }
 }
