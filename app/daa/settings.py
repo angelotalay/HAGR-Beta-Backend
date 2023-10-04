@@ -13,9 +13,10 @@ LIBAGE_URL = 'http://la.ageing-map.org'
 # The database short name to get the references for
 LIBAGE_DATABASE = 'daa'
 ###
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-ABSOLUTE_PATH = '/srv/www/beta.ageing-map.org/daa'
-sys.path.append(ABSOLUTE_PATH + '/lib')
+# ABSOLUTE_PATH = '/srv/www/beta.ageing-map.org/daa'
+sys.path.append(BASE_DIR + '/lib')
 
 ALLOWED_HOSTS = ['localhost', '.ageing-map.org']
 
@@ -138,7 +139,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ABSOLUTE_PATH + '/media'
+MEDIA_ROOT = BASE_DIR + '/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -149,7 +150,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ABSOLUTE_PATH + '/static/'
+STATIC_ROOT = BASE_DIR + '/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -160,7 +161,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ABSOLUTE_PATH + '/resources',
+    BASE_DIR + '/resources',
 )
 
 # List of finder classes that know how to find static files in
@@ -177,10 +178,10 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            ABSOLUTE_PATH + '/templates/',
-            ABSOLUTE_PATH + '/atlas/templates/atlas/',
-            ABSOLUTE_PATH + '/tools/templates/tools/',
-            ABSOLUTE_PATH + '/go_db/templates/go_db/',
+            BASE_DIR + '/templates/',
+            BASE_DIR + '/atlas/templates/atlas/',
+            BASE_DIR + '/tools/templates/tools/',
+            BASE_DIR + '/go_db/templates/go_db/',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
