@@ -57,6 +57,9 @@ class DrugAgeLifespan(models.Model):
         abstract = True
 
 class MaxLifespan(DrugAgeLifespan):
+    """ UNUSED FOR NOW AS THERE ARE OTHER COLUMNS THAT HAVE THIS INFORMATION.
+    This is for the max_lifespan_change_percent column in the results table that utilises an intermediary table to contain its p-values.
+    """
     max_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     class Meta:
         managed = True
@@ -66,6 +69,9 @@ class MaxLifespan(DrugAgeLifespan):
         return "{} : p-value={}".format(self.max_lifespan_change_percent, self.p_value)
 
 class AverageLifespan(DrugAgeLifespan):
+    """ UNUSED FOR NOW AS THERE ARE OTHER COLUMNS THAT HAVE THIS INFORMATION.
+    This is for the average_lifespan_change_percent column in the results table that utilises an intermediary table to contain its p-values.
+    """
     average_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     class Meta:
         managed= True
@@ -93,7 +99,14 @@ class DrugAgeResults(models.Model):
       ('S', 'Significant'),
       ('NS', 'Non-significant'),
       ('', ''),
-    )    
+    )
+
+    P_VALUE_CHOICES = (
+        ("NS", "Non-significant"),
+        ("p<0.05", "p<0.05"),
+        ("p<0.01", "p<0.01"),
+        ("p<0.001", "p<0.001"),
+    )
 
     id = models.AutoField(max_length=11, primary_key=True)
     compound_id = models.ForeignKey(DrugAgeCompounds, db_column='compound_id', on_delete=models.CASCADE)
@@ -103,14 +116,14 @@ class DrugAgeResults(models.Model):
     strain = models.CharField(blank=True, null=True, max_length=255)
     dosage = models.CharField(blank=True, null=True, max_length=100)
     avg_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    avg_lifespan_p_value = models.CharField(choices=P_VALUE_CHOICES, max_length=10 ,  blank=True, null=True)
     max_lifespan_change_percent = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    max_lifespan_p_value = models.CharField(choices=P_VALUE_CHOICES, max_length=10 ,blank=True, null=True)
     significance = models.CharField(null=True, blank=True,choices=SIG_CHOICES, max_length=255)
     pubmed_id = models.IntegerField(max_length=11, null=False)
     notes = models.CharField(blank=True, null=True, max_length=2000)
     last_modified = models.DateTimeField(auto_now=True)
-    biblio_id = models.ForeignKey(DrugAgeBiblio, db_column='biblio_id', on_delete=models.CASCADE)
-    max_lifespan = models.ForeignKey(MaxLifespan, db_column='max_lifespan', on_delete=models.CASCADE, null=True, blank=True)
-    average_lifespan = models.ForeignKey(AverageLifespan, db_column='average_lifespan', on_delete=models.CASCADE, null=True, blank=True)
+    biblio_id = models.ForeignKey(DrugAgeBiblio, db_column='biblio_id', on_delete=models.CASCADE, blank=True, null=True)
 
     def __unicode__(self):
         return str(self.compound_id)

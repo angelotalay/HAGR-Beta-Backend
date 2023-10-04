@@ -20,7 +20,7 @@ from daa.django_libage.models import BibliographicEntry, Citation, Tag, Source
 from daa.atlas.admin_widgets import SelectableForeignKeyRawIdWidget, EditForeignKeyRawIdWidget, GeneLookupWidget, ReferenceLookupWidget 
 from daa.atlas.fetch import FetchGene, FetchReference, FetchDetails
 from daa.atlas.admin_forms import ReferenceAdminForm
-
+from daa.drugage.forms import DrugAgeResultsForm
 
 #
 # DrugAge
@@ -41,12 +41,19 @@ class DrugAgeBiblioAdmin(admin.ModelAdmin):
 
 
 class DrugAgeResultsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'compound_id', 'species', 'strain', 'significance' , 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes','last_modified', 'max_lifespan', 'average_lifespan')
+    form = DrugAgeResultsForm
+    fields = []
+    list_display = ('id', 'compound_id', 'species', 'strain', 'avg_lifespan_change_percent', "avg_lifespan_p_value" , 'max_lifespan_change_percent', "max_lifespan_p_value",'dosage','gender','pubmed_id','notes','last_modified')
     list_display_links = ('id','compound_id')
     ordering = ('-last_modified',)
     # raw_id_fields = ['compound_id', 'biblio_id']
  
     search_fields = ('compound_id__compound_name', 'species', 'age_at_treatment', 'strain', 'avg_lifespan_change_percent', 'max_lifespan_change_percent','dosage','gender','pubmed_id','notes')
+
+    def save_model(self, request, obj, form, change):
+        # Use the BiblioId instance we added to form's cleaned_data and save it
+        obj.biblio_id = form.cleaned_data['BiblioId']
+        super(DrugAgeResultsAdmin, self).save_model(request, obj, form, change)
 
     def get_urls(self):
         urls = super(DrugAgeResultsAdmin, self).get_urls()
@@ -189,6 +196,8 @@ class DrugAgeResultsAdmin(admin.ModelAdmin):
             ref.citations.add(cited) 
 
             return HttpResponse('Complete', content_type="text/plain")
+
+
 
 class AverageLifespanAdmin(admin.ModelAdmin):
     list_display = ('id', 'p_value', 'average_lifespan_change_percent')
