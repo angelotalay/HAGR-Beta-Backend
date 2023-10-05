@@ -97,7 +97,7 @@ DATABASES = {
     },
     'drugage': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dev_drug_age',
+        'NAME': 'dev_drugage',
         'USER': os.environ.get("MYSQL_USER"),
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': os.environ.get("MYSQL_HOST"),
