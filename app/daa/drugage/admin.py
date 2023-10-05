@@ -42,7 +42,7 @@ class DrugAgeBiblioAdmin(admin.ModelAdmin):
 
 class DrugAgeResultsAdmin(admin.ModelAdmin):
     form = DrugAgeResultsForm
-    fields = []
+    fields = ["compound_id", "species", "gender", "dosage", "age_at_initiation", "avg_lifespan_change_percent", "avg_lifespan_p_value", "max_lifespan_change_percent", "max_lifespan_p_value","pubmed_id", "notes", "biblio_id"]
     list_display = ('id', 'compound_id', 'species', 'strain', 'avg_lifespan_change_percent', "avg_lifespan_p_value" , 'max_lifespan_change_percent', "max_lifespan_p_value",'dosage','gender','pubmed_id','notes','last_modified')
     list_display_links = ('id','compound_id')
     ordering = ('-last_modified',)

@@ -111,7 +111,7 @@ class DrugAgeResults(models.Model):
     id = models.AutoField(max_length=11, primary_key=True)
     compound_id = models.ForeignKey(DrugAgeCompounds, db_column='compound_id', on_delete=models.CASCADE)
     species = models.CharField(blank=True, null=True, max_length=255)
-    age_at_treatment = models.IntegerField(max_length=3, blank=True, null=True)
+    age_at_initiation = models.CharField(blank=True, null=True, max_length=20, verbose_name="age at initiation of treatment")
     gender = models.CharField(blank=True, null=True, choices=GENDER_CHOICES, max_length=15)
     strain = models.CharField(blank=True, null=True, max_length=255)
     dosage = models.CharField(blank=True, null=True, max_length=100)
