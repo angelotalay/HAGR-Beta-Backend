@@ -49,7 +49,7 @@ class DrugAgeCompounds(models.Model):
     iupac_name = models.CharField(blank=True, null=True, max_length=800)
 
     def __unicode__(self):
-        return self.compound_name
+        return unicode(self.compound_name)
 
 class DrugAgeLifespan(models.Model):
     p_value = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
@@ -126,7 +126,10 @@ class DrugAgeResults(models.Model):
     biblio_id = models.ForeignKey(DrugAgeBiblio, db_column='biblio_id', on_delete=models.CASCADE, blank=True, null=True)
 
     def __unicode__(self):
-        return str(self.compound_id)
+        compound_name = unicode(self.compound_id)
+        return compound_name
+    def __str__(self):
+        return self.__unicode__().encode('utf-8')
 
 class DrugAgeCompoundSynonyms(models.Model):
     class Meta:

@@ -22,6 +22,8 @@ ALLOWED_HOSTS = ['localhost', '.ageing-map.org']
 
 DEBUG = True
 
+DEFAULT_CHARSET="utf-8"
+
 TEMPLATE_DEBUG = True
 
 # ADMINS = (
