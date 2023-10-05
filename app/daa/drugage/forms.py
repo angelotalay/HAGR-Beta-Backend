@@ -38,7 +38,7 @@ class DrugAgeResultsForm(forms.ModelForm):
         except DrugAgeBiblio.DoesNotExist:
             # If the entry doesn't exist, create a new one
             biblio_entry = DrugAgeBiblio.objects.create(
-                pubmed_id=pubmed_id,
+                pubmed=pubmed_id,
                 title=biblio_data["title"],
                 journal=biblio_data["journal"],
                 year=biblio_data["year"],
