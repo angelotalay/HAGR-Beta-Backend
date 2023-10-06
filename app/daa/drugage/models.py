@@ -49,7 +49,8 @@ class DrugAgeCompounds(models.Model):
     iupac_name = models.CharField(blank=True, null=True, max_length=800)
 
     def __unicode__(self):
-        return unicode(self.compound_name)
+        return unicode("%d %s" % (self.id, self.compound_name))
+
 
 class DrugAgeLifespan(models.Model):
     p_value = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
