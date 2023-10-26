@@ -36,8 +36,21 @@ def get_pmid_information(pmid):
         primary_author_last_name = author_list[0].find(".//LastName").text
         primary_author_initial = author_list[0].find(".//Initials").text
         author_entry = "{}, {}".format(primary_author_last_name, primary_author_initial)
+        if len(author_list) > 3:
+            author_entry = author_entry + " et al"
         if len(author_list) > 1:
-            author_entry = author_entry + " et al."
+            authors = []
+            for author in author_list:
+                try:
+                    last_name = author.find(".//LastName").text
+                    first_initial = author.find(".//Initials").text
+                    full_name = "{}, {}".format(last_name, first_initial)
+                    authors.append(full_name)
+                except AttributeError:
+                    continue
+            authors = ", ".join(authors)
+        else:
+            authors = ""
         title = root.find(".//ArticleTitle").text
         year = root.find(".//PubDate/Year").text
         journal = root.find(".//Title").text
@@ -62,6 +75,7 @@ def get_pmid_information(pmid):
 
         return {
             "author": author_entry,
+            "authors": authors,
             "title": title,
             "year": year,
             "journal": journal,
