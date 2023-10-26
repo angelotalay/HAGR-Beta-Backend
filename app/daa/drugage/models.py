@@ -107,6 +107,7 @@ class DrugAgeResults(models.Model):
         ("p<0.05", "p<0.05"),
         ("p<0.01", "p<0.01"),
         ("p<0.001", "p<0.001"),
+        ("p<0.0001", "p<0.0001")
     )
 
     id = models.AutoField(max_length=11, primary_key=True)
