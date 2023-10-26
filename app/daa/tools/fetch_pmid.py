@@ -32,7 +32,12 @@ def get_pmid_information(pmid):
 
     if response.status_code == 200:
         root = ET.fromstring(response.text)
-
+        author_list = root.find(".//AuthorList")
+        primary_author_last_name = author_list[0].find(".//LastName").text
+        primary_author_initial = author_list[0].find(".//Initials").text
+        author_entry = "{}, {}".format(primary_author_last_name, primary_author_initial)
+        if len(author_list) > 1:
+            author_entry = author_entry + " et al."
         title = root.find(".//ArticleTitle").text
         year = root.find(".//PubDate/Year").text
         journal = root.find(".//Title").text
@@ -56,6 +61,7 @@ def get_pmid_information(pmid):
         doi = doi_elem.text if doi_elem is not None else None
 
         return {
+            "author": author_entry,
             "title": title,
             "year": year,
             "journal": journal,
