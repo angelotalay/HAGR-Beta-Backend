@@ -2,7 +2,6 @@ version: "3"
 
 services:
   mysql-db:
-    image: beta-hagr-mysql
     env_file:
       - .env
     build:
@@ -16,7 +15,6 @@ services:
     networks:
       - hagr-shared-network
   postgres-db:
-    image: beta-hagr-postgres
     env_file:
       - .env
     build:
@@ -30,7 +28,6 @@ services:
     networks:
       - hagr-shared-network
   app:
-    image: beta-hagr-app
     env_file:
       - .env
     build:
