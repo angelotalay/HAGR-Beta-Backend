@@ -49,6 +49,8 @@ for record in records:
     mapped_pvalue = map_pvalue_to_choice(cleaned_pvalue)
 
     # Update fields based on your conditions
+    if record.avg_lifespan_p_value is not None or record.max_lifespan_p_value is not None:
+        continue
     if record.avg_lifespan_change_percent is not None and record.max_lifespan_change_percent is None:
         record.avg_lifespan_p_value = mapped_pvalue
     elif record.avg_lifespan_change_percent is None and record.max_lifespan_change_percent is not None:
