@@ -20,6 +20,4 @@ RUN apt-get update && \
 # Copy the rest of the application code
 COPY . /app
 
-# Set the command to run the application
-ENTRYPOINT ["python"]
-CMD ["manage.py", "runserver", "0.0.0.0:8000"]
+

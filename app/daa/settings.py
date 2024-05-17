@@ -41,9 +41,17 @@ DATABASES = {
         'HOST': os.environ.get("POSTGRES_HOST"), #CHANGED FOR TESTING
         'PORT': '5432',
     },
+    # 'libage': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'la',
+    #     'USER': os.environ.get("POSTGRES_USER"),
+    #     'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
+    #     'HOST': os.environ.get("POSTGRES_HOST"),
+    #     'PORT': '5432',
+    # },
     'libage': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'la',
+        'NAME': 'libage',
         'USER': os.environ.get("POSTGRES_USER"),
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
         'HOST': os.environ.get("POSTGRES_HOST"),
