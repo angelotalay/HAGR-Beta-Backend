@@ -1,8 +1,8 @@
 import sys
 import os
 from dotenv import load_dotenv
-# Django settings for daa project.
 
+# Django settings for daa project.
 load_dotenv()
 ### This should probably be as environment variables?
 # django-libage settings
@@ -22,15 +22,48 @@ ALLOWED_HOSTS = ['localhost', '.ageing-map.org']
 
 DEBUG = True
 
-DEFAULT_CHARSET="utf-8"
+DEFAULT_CHARSET = "utf-8"
 
 TEMPLATE_DEBUG = True
+
 
 # ADMINS = (
 #    ('Daniel Thornton', 'daniel.thornton@liverpool.ac.uk'),
 # )
 
-# MANAGERS = ADMINS
+# MANAGERS = ADMINSLOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#     },
+# }
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'DEBUG',
+#         },
+#     },
+# }
 
 DATABASES = {
     'default': {
@@ -38,17 +71,9 @@ DATABASES = {
         'NAME': 'beta_daa',
         'USER': os.environ.get("POSTGRES_USER"),
         'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-        'HOST': os.environ.get("POSTGRES_HOST"), #CHANGED FOR TESTING
+        'HOST': os.environ.get("POSTGRES_HOST"),  # CHANGED FOR TESTING
         'PORT': '5432',
     },
-    # 'libage': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'la',
-    #     'USER': os.environ.get("POSTGRES_USER"),
-    #     'PASSWORD': os.environ.get("POSTGRES_PASSWORD"),
-    #     'HOST': os.environ.get("POSTGRES_HOST"),
-    #     'PORT': '5432',
-    # },
     'libage': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'libage',
@@ -112,7 +137,7 @@ DATABASES = {
         'PASSWORD': os.environ.get("MYSQL_PASSWORD"),
         'HOST': os.environ.get("MYSQL_HOST"),
         'PORT': '3306',
-        'OPTIONS':{
+        'OPTIONS': {
             'charset': 'utf8mb4'
         }
 
@@ -126,7 +151,6 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -259,11 +283,17 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
-DATABASE_ROUTERS = ['daa.genage_human.router.GenageRouter', 'daa.genage_model.router.GenageRouter',
-                    'daa.anage.router.AnageRouter', 'daa.gendr.router.GendrRouter',
-                    'daa.django_libage.router.LibageRouter', 'daa.longevity.router.LongevityRouter',
-                    'daa.ortholog.router.OrthologRouter', 'daa.drugage.router.DrugAgeRouter',
-                    'daa.cellage.router.CellAgeRouter']  # , 'daa.go_db.router.GORouter']
+DATABASE_ROUTERS = [
+    'daa.genage_human.router.GenageRouter',
+    'daa.genage_model.router.GenageRouter',
+    'daa.anage.router.AnageRouter',
+    'daa.gendr.router.GendrRouter',
+    'daa.django_libage.router.LibageRouter',
+    'daa.longevity.router.LongevityRouter',
+    'daa.ortholog.router.OrthologRouter',
+    'daa.drugage.router.DrugAgeRouter',
+    'daa.cellage.router.CellAgeRouter'
+]
 
 SUIT_CONFIG = {
     'ADMIN_NAME': 'HAGR Curator',

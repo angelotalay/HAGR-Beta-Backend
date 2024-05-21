@@ -11,7 +11,7 @@ COPY requirements.txt /app/
 
 # Install dependencies and upgrade pip
 RUN apt-get update && \
-    apt-get install -y libmariadb-dev-compat gcc build-essential default-libmysqlclient-dev && \
+    apt-get install -y libmariadb-dev-compat gcc build-essential default-libmysqlclient-dev default-mysql-client && \
     python -m pip install --upgrade pip && \
     pip2 install -r requirements.txt --no-cache-dir && \
     apt-get clean && \
@@ -20,4 +20,6 @@ RUN apt-get update && \
 # Copy the rest of the application code
 COPY . /app
 
-
+# Set the command to run the application
+ENTRYPOINT ["python"]
+CMD ["manage.py", "runserver", "0.0.0.0:8000"]

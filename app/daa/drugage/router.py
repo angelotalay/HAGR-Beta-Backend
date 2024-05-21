@@ -1,3 +1,8 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class DrugAgeRouter(object):
 
     def db_for_read(self, model, **hints):
@@ -15,8 +20,21 @@ class DrugAgeRouter(object):
             return True
 
     def allow_syncdb(self, db, model):
-        "Make sure the drugage app only appears on the 'other' db"
-        if db == 'drugage':
-            return model._meta.app_label == 'drugage'
-        elif model._meta.app_label == 'drugage':
-            return False
+        if model._meta.app_label == 'drugage':
+            if db == 'drugage':
+                print("Allowing migration for {} on {}".format(model, db))
+                return True
+            else:
+                print("Blocking migration for {} on {}".format(model, db))
+                return False
+        return None
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
+        if app_label == 'drugage':
+            if db == 'drugage':
+                print("Allowing migration for {} on {}".format(app_label, db))
+                return True
+            else:
+                print("Blocking migration for {} on {}".format(app_label, db))
+                return False
+        return None

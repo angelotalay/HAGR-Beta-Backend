@@ -19,6 +19,9 @@ class Submission(models.Model):
     added_by = models.ForeignKey(User, blank=True, null=True)
     added_on = models.DateField(blank=True, null=True)
 
+    class Meta:
+        app_label = "beta_daa"
+
     def __unicode__(self):
         return u'{} - {} ({})'.format(self.date_submitted, self.submitter_name, self.submitter_email)
 
